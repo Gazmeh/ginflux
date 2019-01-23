@@ -1,0 +1,192 @@
+{
+	"type": "Page",
+	"label": "دونیت - حمایت مالی پروژه‌ها",
+	"description": "دونیت شمارا در جمع کردن کمک‌های مالی یاری می‌کند.",
+	"style": {
+		"layout": "column",
+		"borderRadius": {
+			
+		},
+		"borderStyleColorWidth": {
+			
+		},
+		"borderStyle": {
+			
+		},
+		"borderWidth": {
+			
+		},
+		"borderColor": {
+			"bottom": "none"
+		},
+		"flexDirection": "wb-flex-column",
+		"padding": {
+			"isUniform": true,
+			"uniform": 11
+		},
+		"margin": {
+			"isUniform": true
+		},
+		"alignItems": "wb-flex-align-items-stretch",
+		"justifyContent": "wb-flex-justify-content-start"
+	},
+	"contents": [
+		{
+			"style": {
+				"padding": {
+					
+				},
+				"margin": {
+					
+				},
+				"borderRadius": {
+					
+				},
+				"borderStyleColorWidth": {
+					
+				},
+				"borderStyle": {
+					
+				},
+				"borderWidth": {
+					
+				},
+				"borderColor": {
+					"bottom": "none"
+				},
+				"flexDirection": "wb-flex-row",
+				"alignItems": "wb-flex-align-items-stretch",
+				"justifyContent": "wb-flex-justify-content-space-around",
+				"flexAlignItem": "wb-flex-item-auto"
+			},
+			"type": "Group",
+			"name": "Panel",
+			"contents": [
+				{
+					"style": {
+						"padding": {
+							
+						},
+						"borderRadius": {
+							
+						},
+						"borderStyleColorWidth": {
+							
+						},
+						"borderStyle": {
+							
+						},
+						"borderWidth": {
+							
+						},
+						"borderColor": {
+							"bottom": "none"
+						},
+						"margin": {
+							
+						},
+						"flexAlignItem": "wb-flex-item-auto"
+					},
+					"type": "CommonFeatureLinks",
+					"name": "Widget",
+					"features": [
+						{
+							"icon": "assignment_turned_in",
+							"title": "وب‌برگر",
+							"text": "See weburger home",
+							"action": {
+								"type": "link",
+								"link": "https://gitlab.com/groups/weburger",
+								"label": "وب‌برگر"
+							}
+						},
+						{
+							"icon": "assignment_turned_in",
+							"title": "ویجت‌های عمومی",
+							"text": "See common widgets",
+							"action": {
+								"type": "link",
+								"link": "https://gitlab.com/weburger/am-wb-common",
+								"label": "common"
+							}
+						},
+						{
+							"icon": "assignment_turned_in",
+							"title": "راهنمای لینک آیتم",
+							"text": "See online help about feature list.",
+							"action": {
+								"link": "https://gitlab.com/weburger/am-wb-common/wikis/feature-links",
+								"type": "link",
+								"label": "Features link"
+							}
+						},
+						{
+							"icon": "assignment_turned_in",
+							"title": "عنوان اکشن#1",
+							"text": "توضیحات آیتم"
+						},
+						{
+							"icon": "assignment_turned_in",
+							"title": "عنوان اکشن#2",
+							"text": "توضیحات آیتم"
+						},
+						{
+							"icon": "assignment_turned_in",
+							"title": "عنوان اکشن#3",
+							"text": "توضیحات آیتم"
+						}
+					]
+				},
+				{
+					"style": {
+						"padding": {
+							
+						},
+						"borderRadius": {
+							
+						},
+						"borderStyleColorWidth": {
+							
+						},
+						"borderStyle": {
+							
+						},
+						"borderWidth": {
+							
+						},
+						"borderColor": {
+							
+						},
+						"margin": {
+							
+						}
+					},
+					"type": "CommonFeatureMozaic",
+					"name": "Widget",
+					"features": [
+						{
+							"icon": "assignment_turned_in",
+							"title": "عنوان آیتم",
+							"text": "توضیحات آیتم"
+						},
+						{
+							"icon": "assignment_turned_in",
+							"title": "عنوان آیتم",
+							"text": "توضیحات آیتم"
+						},
+						{
+							"icon": "assignment_turned_in",
+							"title": "عنوان آیتم",
+							"text": "توضیحات آیتم"
+						},
+						{
+							"icon": "assignment_turned_in",
+							"title": "عنوان آیتم",
+							"text": "توضیحات آیتم"
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,25 @@
+{
+	"name": "ginflux",
+	"title": "Gazmeh influxdb UI",
+	"description": "General porpouse report dashboard.",
+	"version": "0.1.0",
+	"license": "MIT",
+	"homepage": "https://gitlab.com/mostafa-barmshory/ginflux",
+	"dependencies": {
+		"angular-material-dashboard": "https://gitlab.com/angular-material-dashboard/angular-material-dashboard.git#2.1.x",
+		"am-wb-chart": "https://gitlab.com/am-wb/am-wb-chart.git#2.4.x",
+		"d3-array": "https://github.com/d3/d3-array.git#1.2.1"
+	},
+	"devDependencies": {
+		"angular-mocks": "1.7.x"
+	},
+	"resolutions": {
+		"angular": "1.7.x"
+	},
+	"appPath": "app",
+	"moduleName": "ginfluxApp",
+	"backend": {
+		"host": "195.146.59.40",
+		"port": 8083
+	}
+}

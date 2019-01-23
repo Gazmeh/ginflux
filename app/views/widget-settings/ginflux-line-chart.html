@@ -1,0 +1,211 @@
+<!-- Size -->
+<section>
+	<md-input-container>
+		<label translate>Height</label>
+		<input 
+			type="number" 
+			ng-model="ctrl.chart.height"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+</section>
+
+<!-- Margin -->
+<section>
+	<md-input-container>
+		<label translate>Top</label>
+		<input 
+			type="number" 
+			ng-model="ctrl.chart.margin.top"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+	<md-input-container>
+		<label translate>Right</label>
+		<input 
+			type="number" 
+			ng-model="ctrl.chart.margin.right"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+	<md-input-container>
+		<label translate>Bottom</label>
+		<input 
+			type="number" 
+			ng-model="ctrl.chart.margin.bottom"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+	<md-input-container>
+		<label translate>Left</label>
+		<input 
+			type="number" 
+			ng-model="ctrl.chart.margin.left"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+</section>
+
+
+<!-- Legend -->
+<section>
+	<md-switch 
+		ng-model="ctrl.chart.legend.enable"
+		ng-change="ctrl.chartChanged()">
+		<span translate>Legend</span>
+	</md-switch>
+	<md-input-container>
+		<label translate>Position</label>
+		<input 
+			type="text" 
+			ng-model="ctrl.chart.legend.position"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+	<md-input-container>
+		<label translate>Top</label>
+		<input 
+			type="number" 
+			ng-model="ctrl.chart.legend.margin.top"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+	<md-input-container>
+		<label translate>Right</label>
+		<input 
+			type="number" 
+			ng-model="ctrl.chart.legend.margin.right"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+	<md-input-container>
+		<label translate>Bottom</label>
+		<input 
+			type="number" 
+			ng-model="ctrl.chart.legend.margin.bottom"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+	<md-input-container>
+		<label translate>Left</label>
+		<input 
+			type="number" 
+			ng-model="ctrl.chart.legend.margin.left"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+</section>
+
+<!-- X -->
+<section>
+	<md-input-container>
+		<label translate>Label</label>
+		<input 
+			type="text" 
+			ng-model="ctrl.chart.x.label"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+	<md-input-container>
+		<label translate>Format type</label>
+		<input 
+			type="text" 
+			ng-model="ctrl.chart.x.format.type"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+	<md-input-container>
+		<label translate>Format specifier</label>
+		<input 
+			type="text" 
+			ng-model="ctrl.chart.x.format.specifier"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+	<md-input-container>
+		<label translate>Rotate Labels</label>
+		<input 
+			type="number" 
+			ng-model="ctrl.chart.x.rotateLabels"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+</section>
+
+<!-- Y -->
+<section>
+	<md-input-container>
+		<label translate>Label</label>
+		<input
+			type="text"
+			ng-model="ctrl.chart.y.label"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+	<md-input-container>
+		<label translate>Format type</label>
+		<input
+			type="text"
+			ng-model="ctrl.chart.y.format.type"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+	<md-input-container>
+		<label translate>Format specifier</label>
+		<input
+			type="text"
+			ng-model="ctrl.chart.y.format.specifier"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+	<md-input-container>
+		<label translate>Rotate Labels</label>
+		<input
+			type="text"
+			ng-model="ctrl.chart.y.rotateLabels"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+	<md-input-container>
+		<label translate>Y1-min</label>
+		<input
+			type="text"
+			ng-model="ctrl.chart.y.min"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+	<md-input-container>
+		<label translate="">Y1-max</label>
+		<input
+			type="text"
+			ng-model="ctrl.chart.y.max"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+</section>
+	
+<!-- Y2 -->
+<section>
+	<md-input-container>
+		<label translate>Label</label>
+		<input
+			type="text"
+			ng-model="ctrl.chart.y2.label"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+	<md-input-container>
+		<label translate>Format type</label>
+		<input
+			type="text"
+			ng-model="ctrl.chart.y2.format.type"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+	<md-input-container>
+		<label translate>Format specifier</label>
+		<input
+			type="text"
+			ng-model="ctrl.chart.y2.format.specifier"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+	<md-input-container>
+		<label translate>Rotate Labels</label>
+		<input
+			type="text"
+			ng-model="ctrl.chart.y2.rotateLabels"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+	<md-input-container>
+		<label translate>Y2-min</label>
+		<input
+			type="text"
+			ng-model="ctrl.chart.y2.min"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+	<md-input-container>
+		<label translate="">Y2-max</label>
+		<input
+			type="text"
+			ng-model="ctrl.chart.y2.max"
+			ng-change="ctrl.chartChanged()">
+	</md-input-container>
+</section>

@@ -1,0 +1,40 @@
+{
+	"@guiclass": "TestPlanGui",
+	"@testclass": "TestPlan",
+	"@testname": "Test Plan",
+	"@enabled": true,
+	"stringProp": [
+		{
+			"@name": "TestPlan.comments"
+		},
+		{
+			"@name": "TestPlan.user_define_classpath"
+		}
+	],
+	"boolProp": [
+		{
+			"@name": "TestPlan.functional_mode",
+			"$": "false"
+		},
+		{
+			"@name": "TestPlan.tearDown_on_shutdown",
+			"$": "true"
+		},
+		{
+			"@name": "TestPlan.serialize_threadgroups",
+			"$": "false"
+		}
+	],
+	"elementProp": {
+		"@name": "TestPlan.user_defined_variables",
+		"@elementType": "Arguments",
+		"@guiclass": "ArgumentsPanel",
+		"@testclass": "Arguments",
+		"@testname": "User Defined Variables",
+		"@enabled": true,
+		"collectionProp": {
+			"@name": "Arguments.arguments"
+		}
+	},
+	"hashTree": []
+}

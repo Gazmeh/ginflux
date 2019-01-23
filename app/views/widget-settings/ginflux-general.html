@@ -1,0 +1,66 @@
+<!-- TODO: maso, 2018: move to chart package -->
+
+
+
+<md-switch 
+	ng-model="ctrl.caption.enable"
+    ng-change="ctrl.captionChanged(ctrl.caption)"
+	translate>Enable</md-switch>
+
+<md-input-container>
+  <label translate>Chart Caption</label>
+  <textarea
+    type="text"
+    aria-label="tag description"
+    rows="2"
+    ng-model="ctrl.caption.html"
+    ng-change="ctrl.captionChanged(ctrl.caption)"></textarea>
+</md-input-container>
+
+
+<!-- Legend -->
+
+<!-- legend.enable -->
+<md-switch 
+	ng-model="ctrl.legend.enable" 
+	ng-change="ctrl.setLegend(ctrl.legend)"
+	aria-label="legend">
+	<span translate>Legend</span>
+</md-switch>
+
+<!-- legend.margin -->
+<md-input-container
+	ng-if="ctrl.legend.enable">
+	<label translate>Margin</label>
+	<input 
+		ng-model="ctrl.legend.margin"
+		ng-change="ctrl.setLegend(ctrl.legend)">
+</md-input-container>
+
+<!-- legend.position -->
+<md-input-container
+	ng-if="ctrl.legend.enable">
+	<label translate>Position</label>
+	<md-select 
+		ng-model="ctrl.legend.position"
+		ng-change="ctrl.setLegend(ctrl.legend)">
+		<md-option
+			value="top">
+			<em translate>Top</em>
+		</md-option>
+		<md-option
+			value="right">
+			<em translate>Right</em>
+		</md-option>
+		<md-option
+			value="bottom">
+			<em translate>Bottom</em>
+		</md-option>
+		<md-option
+			value="left">
+			<em translate>Left</em>
+		</md-option>
+	</md-select>
+</md-input-container>
+	
+

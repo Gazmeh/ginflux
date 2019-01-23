@@ -1,0 +1,37 @@
+{
+	"@guiclass": "HTMLAssertionGui",
+	"@testclass": "HTMLAssertion",
+	"@testname": "name",
+	"@enabled": true,
+	"stringProp": [
+		{
+			"@name": "TestPlan.comments",
+			"$": "comment"
+		},
+		{
+			"@name": "html_assertion_doctype",
+			"$": "auto"
+		},
+		{
+			"@name": "html_assertion_filename"
+		}
+	],
+	"longProp": [
+		{
+			"@name": "html_assertion_error_threshold",
+			"$": "0"
+		},
+		{
+			"@name": "html_assertion_warning_threshold",
+			"$": "0"
+		},
+		{
+			"@name": "html_assertion_format",
+			"$": "0"
+		}
+	],
+	"boolProp": {
+		"@name": "html_assertion_errorsonly",
+		"$": "false"
+	}
+}

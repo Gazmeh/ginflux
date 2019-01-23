@@ -1,0 +1,12 @@
+<div
+	mb-preloading="ctrl.status === 'loading'">
+	<!-- TODO: display error and status -->
+<!-- 	{{ctrl.state}} -->
+<!-- 	{{ctrl.error}} -->
+	
+	<nvd3 
+		ng-if="ctrl.state === 'loaded'"
+		options="ctrl.option"
+		data="ctrl.data">
+	</nvd3>
+</div>

@@ -1,0 +1,5 @@
+md-option ng-md-icon,
+md-select-value ng-md-icon {
+	margin-end: 5px;
+	-webkit-margin-end: 5px
+}

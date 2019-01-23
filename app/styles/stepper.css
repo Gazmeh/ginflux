@@ -1,0 +1,29 @@
+.md-stepper-indicator.md-completed .md-stepper-number,
+.md-stepper-indicator.md-active .md-stepper-number {
+	background-color: #009688 !important;
+}
+
+.md-stepper-indicator-wrapper {
+	background-color: #fafafa !important;
+}
+
+md-icon.md-default-theme, md-icon {
+	color: white;
+}
+
+.md-stepper-title {
+	font-family: IRANSansWeb, "Times New Roman", Times, serif;	
+}
+
+.md-stepper-indicator.md-error .md-stepper-title,
+.md-error .md-stepper-error-message {
+	color: #ff730b !important;	
+}
+
+.chips-without-underline md-chips-wrap{
+	box-shadow:none !important;
+}
+
+.md-steppers-header {
+	flex-wrap:wrap !important;
+}

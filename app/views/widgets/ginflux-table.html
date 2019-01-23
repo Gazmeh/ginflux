@@ -1,0 +1,28 @@
+<!-- TODO: maso, 2018: show loading, error and initial states -->
+<div ng-if="ctrl.state === 'error'">
+{{ctrl.error}}
+</div>
+<table
+	class="mb-table gh-table"
+	ng-show="ctrl.state === 'loaded'">
+	<thead>
+		<tr
+ 			md-colors="{color: 'primary-700'}"  
+ 			style="text-align: right;">
+			<td 
+				ng-repeat="header in ctrl.headers track by $index">
+				<span translate>{{header}}</span>
+			</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr
+			ng-repeat="row in ctrl.body track by $index">
+			<td 
+				ng-repeat="value in row track by $index" 
+				translate>
+				{{value}}
+			</td>
+		</tr>
+	</tbody>
+</table>

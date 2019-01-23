@@ -1,0 +1,83 @@
+<md-content
+	flex>
+	<div
+		layout="row"
+		layout-wrap>
+		<wb-icon 
+			class="md-button"
+			ng-click="ctrl.createReport()"
+			layout-padding
+			layout-margin
+			md-whiteframe="2"
+			style="width: 200px; height: 200px;"
+			size="200">add</wb-icon>
+		<md-card
+			ng-repeat="report in ctrl.reports track by report.id"
+			style="width: 300px; height: 300px;"
+			layout-paddig>
+			<div
+				ng-click="ctrl.openReport(report)"
+				style="width: 100%; min-height: 215; overflow: hidden; cursor: pointer;">
+				<img 
+					ng-src="/api/v2/cms/dsfds" 
+					ng-src-error="https://www.gravatar.com/avatar/{{report.id | wbmd5}}?d=robohash&size=255"
+					class="md-card-image" 
+					alt="Washed Out"
+					width="100%">
+			</div>
+			<md-card-title>
+				<md-card-title-text>
+					<span 
+						ng-click="ctrl.openReport(report)"
+						class="md-headline"
+						style="cursor: pointer;">{{report.title}}</span>
+				</md-card-title-text>
+			</md-card-title>
+			<md-card-actions 
+				layout="row" 
+				layout-align="end center">
+				<md-button 
+					ng-click="report.favorite=!report.favorite"
+					class="md-icon-button" 
+					aria-label="Favorite">
+					<wb-icon ng-show="report.favorite">favorite</wb-icon>
+					<wb-icon ng-show="!report.favorite">favorite_border</wb-icon>
+				</md-button>
+				<md-button 
+					ng-disabled="true"
+					class="md-icon-button" 
+					aria-label="Share">
+					<wb-icon>share</md-icon>
+				</md-button>
+				<md-menu>
+					<md-button 
+						aria-label="Open local report menu" 
+						class="md-icon-button" 
+						ng-click="$mdMenu.open($event)">
+						<wb-icon>menu</wb-icon>
+					</md-button>
+					<md-menu-content width="4">
+						<md-menu-item>
+							<md-button 
+								ng-click="ctrl.removeReport($index)">
+								<wb-icon>delete</wb-icon>
+								<span translate>Delete</span>
+							</md-button>
+						</md-menu-item>
+						<md-menu-item>
+							<md-button 
+								ng-click="ctrl.cloneReport(report)">
+								<wb-icon>file_copy</wb-icon>
+								<span translate>Clone</span>
+							</md-button>
+						</md-menu-item>
+					</md-menu-content>
+				</md-menu>
+			</md-card-actions>
+		</md-card>
+	</div>
+</md-content>
+
+
+
+

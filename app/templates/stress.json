@@ -1,0 +1,1127 @@
+{
+	"type": "Page",
+	"style": {
+		"flexDirection": "wb-flex-column",
+		"alignItems": "wb-flex-align-items-stretch",
+		"justifyContent": "wb-flex-justify-content-start",
+		"borderColor": {
+			"bottom": "none"
+		},
+		"margin": {
+			"isUniform": true,
+			"uniform": 0
+		},
+		"padding": {
+			"isUniform": true,
+			"uniform": 0
+		}
+	},
+	"contents": [
+		{
+			"style": {
+				"margin": {
+					"isUniform": true,
+					"uniform": 16
+				},
+				"padding": {
+					"isUniform": true,
+					"uniform": 0
+				},
+				"borderRadius": {
+					"uniform": true,
+					"all": 8
+				},
+				"borderStyleColorWidth": {
+					"uniform": true
+				},
+				"borderStyle": {
+					"all": "solid"
+				},
+				"borderWidth": {
+					"all": 1
+				},
+				"borderColor": {
+					"all": "#bfbfbf"
+				},
+				"flexDirection": "wb-flex-column",
+				"alignItems": "wb-flex-align-items-stretch",
+				"justifyContent": "wb-flex-justify-content-start",
+				"flexAlignItem": "wb-flex-item-auto"
+			},
+			"type": "Group",
+			"name": "Panel",
+			"contents": [
+				{
+					"style": {
+						"borderRadius": {
+							"topLeft": 8,
+							"topRight": 8,
+							"bottomLeft": 0,
+							"bottomRight": 0
+						},
+						"flexAlignItem": "wb-flex-item-auto"
+					},
+					"type": "CommonFeatureToolbar",
+					"name": "Widget",
+					"features": [],
+					"label": "Result summary",
+					"description": "This is a summary of test.",
+					"keywords": "test, params"
+				},
+				{
+					"type": "Table",
+					"name": "Table widget",
+					"query":{
+							"query": [
+								{
+									"key": "errors-",
+									"query":"100*(sum (jmeter_samples_latency_count{success=\"false\"}) by (job) / sum (jmeter_samples_latency_count) by (job))"				
+								},{
+									"key": "latency-",
+									"query":"sum(jmeter_samples_latency_sum)by(job)/sum(jmeter_samples_latency_count)by(job)"				
+								},{
+									"key": "throuput-",
+									"query":"sum(jmeter_samples_latency_count)by(job)/ ${run.duration}"				
+								}
+							],
+							"start_dtime": "${run.start_dtime}",
+							"end_dtime": "${run.end_dtime}",
+							"step": "1s"
+					},
+					"searchReplace": [
+						{
+							"query": "errors-.*",
+							"replace": "Errors",
+							"match": true,
+							"regex": true
+						},{
+							"query": "latency.*",
+							"replace": "Response time",
+							"match": true,
+							"regex": true
+						},{
+							"query": "throuput.*",
+							"replace": "Throuput",
+							"match": true,
+							"regex": true
+						}
+					]
+				}
+			]
+		},
+		{
+			"style": {
+				"margin": {
+					"isUniform": true,
+					"uniform": 16
+				},
+				"padding": {
+					"isUniform": true,
+					"uniform": 0
+				},
+				"borderRadius": {
+					"uniform": true,
+					"all": 8
+				},
+				"borderStyleColorWidth": {
+					"uniform": true
+				},
+				"borderStyle": {
+					"all": "solid"
+				},
+				"borderWidth": {
+					"all": 1
+				},
+				"borderColor": {
+					"all": "#bfbfbf"
+				},
+				"flexDirection": "wb-flex-column",
+				"alignItems": "wb-flex-align-items-stretch",
+				"justifyContent": "wb-flex-justify-content-start",
+				"flexAlignItem": "wb-flex-item-auto"
+			},
+			"type": "Group",
+			"name": "Panel",
+			"contents": [
+				{
+					"style": {
+						"borderRadius": {
+							"topLeft": 8,
+							"topRight": 8,
+							"bottomLeft": 0,
+							"bottomRight": 0
+						},
+						"flexAlignItem": "wb-flex-item-auto"
+					},
+					"type": "CommonFeatureToolbar",
+					"name": "Widget",
+					"features": [],
+					"label": "Test parameters",
+					"description": "All test parameters are listed hear in the tabullar view.",
+					"keywords": "test, params"
+				},
+				{
+					"text": "<p>All test parameters are listed hear in the tabullar view.</p>",
+					"type": "HtmlText",
+					"name": "Widget",
+					"style": {
+						"borderColor": {
+							"bottom": "none"
+						},
+						"margin": {
+							"isUniform": true,
+							"uniform": 8
+						},
+						"flexAlignItem": "wb-flex-item-auto"
+					}
+				},
+				{
+					"text": "<table style=\"width: 100%; margin-left: auto; margin-right: auto;\"><tbody><tr><td>Key</td><td>Value</td><td>Descriptioin</td></tr>${#properties.items}<tr><td>${key}</td><td>${value}</td><td>${description}</td></tr>${/properties.items}</tbody></table>",
+					"type": "HtmlText",
+					"name": "Widget",
+					"style": {
+						"borderColor": {
+							"bottom": "none"
+						},
+						"margin": {
+							"isUniform": true,
+							"uniform": 20
+						},
+						"flexAlignItem": "wb-flex-item-auto"
+					}
+				}
+			]
+		},
+		{
+			"style": {
+				"margin": {
+					"isUniform": true,
+					"uniform": 16
+				},
+				"padding": {
+					"isUniform": true,
+					"uniform": 0
+				},
+				"borderRadius": {
+					"uniform": true,
+					"all": 8
+				},
+				"borderStyleColorWidth": {
+					"uniform": true
+				},
+				"borderStyle": {
+					"all": "solid"
+				},
+				"borderWidth": {
+					"all": 1
+				},
+				"borderColor": {
+					"all": "#bfbfbf"
+				},
+				"flexDirection": "wb-flex-column",
+				"alignItems": "wb-flex-align-items-stretch",
+				"justifyContent": "wb-flex-justify-content-start",
+				"flexAlignItem": "wb-flex-item-auto"
+			},
+			"type": "Group",
+			"name": "Panel",
+			"contents": [
+				{
+					"style": {
+						"margin": {
+							
+						},
+						"borderRadius": {
+							"topLeft": 8,
+							"topRight": 8,
+							"bottomLeft": 0,
+							"bottomRight": 0
+						},
+						"borderColor": {
+							"bottom": "none"
+						},
+						"flexAlignItem": "wb-flex-item-auto"
+					},
+					"type": "CommonFeatureToolbar",
+					"name": "Widget",
+					"features": [],
+					"label": "Errors"
+				},
+				{
+					"type": "HtmlText",
+					"name": "Widget",
+					"text": "<p>Number of system failer and cuncurrent users in the test are illustrated int the following chart.</p>",
+					"style": {
+						"borderColor": {
+							"bottom": "none"
+						},
+						"margin": {
+							"isUniform": true,
+							"uniform": 8
+						},
+						"flexAlignItem": "wb-flex-item-auto"
+					}
+				},
+				{
+					"type": "MultiChart",
+					"style": {
+						"margin": {
+							"isUniform": true,
+							"uniform": 20
+						},
+						"borderColor": {
+							"bottom": "none"
+						},
+						"flexAlignItem": "wb-flex-item-auto"
+					},
+					"chart": {
+						"type": "multiChart",
+						"height": 450,
+						"margin": {
+							"top": 50,
+							"right": 75,
+							"bottom": 50,
+							"left": 75
+						},
+						"showLabels": true,
+						"labelSunbeamLayout": false,
+						"pie": {
+							
+						},
+						"xAxis": {
+							"showMaxMin": false,
+							"axisLabel": "Test duration (in secound)"
+						},
+						"yAxis1": {
+							"showMaxMin": false,
+							"axisLabel": "Cuncurent Virtual User"
+						},
+						"yAxis2": {
+							"showMaxMin": false,
+							"axisLabel": "Error Count "
+						}
+					},
+					"xformat": {
+						"type": "DateTime",
+						"format": "%H:%M:%S"
+					},
+					"yformat1": {
+						"type": "Number",
+						"format": ".1f"
+					},
+					"yformat2": {
+						"type": "Number",
+						"format": ".1f"
+					},
+					"caption": {
+						"html": "<p>Success and failer of check points</p>",
+						"enable": true
+					},
+					"query": {
+						"query_range": "sum(irate(jmeter_samples_latency_count{success='false'}[30s])) by (job, success) OR jmeter_running_threads",
+						"start_dtime": "${run.start_dtime}",
+						"end_dtime": "${run.end_dtime}",
+						"step": "3s"
+					},
+					"yAxis2Match": ".*jmeter_running_threads.*",
+					"rename":[{
+						"query": ".*jmeter_running_threads.*",
+						"replace": "Cuncurent users",
+						"match": true,
+						"regex": true
+					},{
+						"query": ".*success.*true.*",
+						"replace": "Success",
+						"match": true,
+						"regex": true
+					},{
+						"query": ".*success.*false.*",
+						"replace": "Failure",
+						"match": true,
+						"regex": true
+					}],
+					"name": "Multi Chart"
+				}
+			]
+		},
+		{
+			"style": {
+				"margin": {
+					"isUniform": true,
+					"uniform": 16
+				},
+				"padding": {
+					"isUniform": true,
+					"uniform": 0
+				},
+				"borderRadius": {
+					"uniform": true,
+					"all": 8
+				},
+				"borderStyleColorWidth": {
+					"uniform": true
+				},
+				"borderStyle": {
+					"all": "solid"
+				},
+				"borderWidth": {
+					"all": 1
+				},
+				"borderColor": {
+					"all": "#bfbfbf"
+				},
+				"flexDirection": "wb-flex-column",
+				"alignItems": "wb-flex-align-items-stretch",
+				"justifyContent": "wb-flex-justify-content-start",
+				"flexAlignItem": "wb-flex-item-auto"
+			},
+			"type": "Group",
+			"name": "Panel",
+			"contents": [
+				{
+					"style": {
+						"margin": {
+							"isUniform": true,
+							"uniform": 0
+						},
+						"borderRadius": {
+							"topLeft": 8,
+							"topRight": 8,
+							"bottomLeft": 0,
+							"bottomRight": 0
+						},
+						"flexAlignItem": "wb-flex-item-auto",
+						"padding": {
+							"isUniform": true,
+							"uniform": 0
+						}
+					},
+					"type": "CommonFeatureToolbar",
+					"name": "Widget",
+					"features": [],
+					"label": "Response time"
+				},
+				{
+					"text": "<p>Response time of the system and cuncurent users are and illustrated in the following chart.</p>",
+					"type": "HtmlText",
+					"name": "Widget",
+					"style": {
+						"borderColor": {
+							"bottom": "none"
+						},
+						"margin": {
+							"isUniform": true,
+							"uniform": 8
+						},
+						"padding": {
+							"isUniform": true,
+							"uniform": 0
+						},
+						"flexAlignItem": "wb-flex-item-auto"
+					}
+				},
+				{
+					"style": {
+						"margin": {
+							"isUniform": true,
+							"uniform": 0
+						},
+						"padding": {
+							"isUniform": true,
+							"uniform": 0
+						},
+						"borderColor": {
+							"bottom": "none"
+						},
+						"flexAlignItem": "wb-flex-item-auto"
+					},
+					"type": "MultiChart",
+					"chart": {
+						"type": "multiChart",
+						"height": 450,
+						"margin": {
+							"top": 50,
+							"right": 75,
+							"bottom": 50,
+							"left": 75
+						},
+						"yDomain": [ 0,	100],
+						"useVoronoi": false,
+						"clipEdge": false,
+						"duration": 250,
+						"useInteractiveGuideline": true,
+						"xAxis": {
+							"showMaxMin": false,
+							"axisLabel": "Test duration (in secound)"
+						},
+						"yAxis1": {
+							"showMaxMin": false,
+							"axisLabel": "Cuncurent Virtual User"
+						},
+						"yAxis2": {
+							"showMaxMin": false,
+							"axisLabel": "Response time (secound)"
+						}
+					},
+					"caption": {
+						"html": "<p style=\"text-align: center;\">Total response time of the system</p>",
+						"enable": true
+					},
+					"xformat": {
+						"type": "DateTime",
+						"format": "%H:%M:%S"
+					},
+					"yformat1": {
+						"type": "Number",
+						"format": ".1f"
+					},
+					"yformat2": {
+						"type": "Number",
+						"format": ".1f"
+					},
+					"query":{
+						"query_range": "avg (irate(jmeter_samples_latency_sum[30s])) OR jmeter_running_threads",
+						"start_dtime": "${run.start_dtime}",
+						"end_dtime": "${run.end_dtime}",
+						"step": "3s"
+					},
+					"yAxis2Match": ".*jmeter_running_threads.*",
+					"rename":[{
+						"query": ".*jmeter_running_threads.*",
+						"replace": "Cuncurent users",
+						"match": true,
+						"regex": true
+					},{
+						"query": ".*",
+						"replace": "Response time",
+						"match": true,
+						"regex": true
+					}],
+					"name": "Multiple Chart"
+				}
+			]
+		},
+		{
+			"style": {
+				"margin": {
+					"isUniform": true,
+					"uniform": 16
+				},
+				"padding": {
+					"isUniform": true,
+					"uniform": 0
+				},
+				"borderRadius": {
+					"uniform": true,
+					"all": 8
+				},
+				"borderStyleColorWidth": {
+					"uniform": true
+				},
+				"borderStyle": {
+					"all": "solid"
+				},
+				"borderWidth": {
+					"all": 1
+				},
+				"borderColor": {
+					"all": "#bfbfbf"
+				},
+				"flexDirection": "wb-flex-column",
+				"alignItems": "wb-flex-align-items-stretch",
+				"justifyContent": "wb-flex-justify-content-start",
+				"flexAlignItem": "wb-flex-item-auto"
+			},
+			"type": "Group",
+			"name": "Panel",
+			"contents": [
+				{
+					"style": {
+						"borderRadius": {
+							"topLeft": 8,
+							"topRight": 8,
+							"bottomLeft": 0,
+							"bottomRight": 0
+						},
+						"borderColor": {
+							"bottom": "none"
+						},
+						"flexAlignItem": "wb-flex-item-auto",
+						"margin": {
+							"isUniform": true,
+							"uniform": 0
+						},
+						"padding": {
+							"isUniform": true,
+							"uniform": 0
+						}
+					},
+					"type": "CommonFeatureToolbar",
+					"name": "Widget",
+					"features": [],
+					"label": "Throughput"
+				},
+				{
+					"text": "<p>The number of action per second (throughput) and cuncurent user are illustrated in the following char, during the test.</p>",
+					"type": "HtmlText",
+					"name": "Widget",
+					"style": {
+						"borderColor": {
+							"bottom": "none"
+						},
+						"margin": {
+							"isUniform": true,
+							"uniform": 8
+						},
+						"padding": {
+							"isUniform": true,
+							"uniform": 0
+						},
+						"flexAlignItem": "wb-flex-item-auto"
+					}
+				},
+				{
+					"style": {
+						"borderColor": {
+							"bottom": "none"
+						},
+						"flexAlignItem": "wb-flex-item-auto"
+					},
+					"type": "MultiChart",
+					"chart": {
+						"type": "multiChart",
+						"height": 450,
+						"margin": {
+							"top": 50,
+							"right": 75,
+							"bottom": 50,
+							"left": 75
+						},
+						"useVoronoi": false,
+						"clipEdge": false,
+						"duration": 250,
+						"useInteractiveGuideline": true,
+						"xAxis": {
+							"showMaxMin": false,
+							"axisLabel": "Test duration (in second)"
+						},
+						"yAxis1": {
+							"showMaxMin": false,
+							"axisLabel": "Throughput (number of actions)"
+						},
+						"yAxis2": {
+							"showMaxMin": false,
+							"axisLabel": "Throughput (number of actions)"
+						}
+					},
+					"caption": {
+						"enable": true,
+						"html": "<p style=\"text-align: center;\">Total throughput of the system (contains both success and failers)&nbsp;</p>"
+					},
+					"xformat": {
+						"type": "DateTime",
+						"format": "%H:%M:%S"
+					},
+					"yformat1": {
+						"type": "Number",
+						"format": ".1f"
+					},
+					"yformat2": {
+						"type": "Number",
+						"format": ".1f"
+					},
+					"query": {
+						"query_range": "sum(irate(jmeter_samples_latency_count[30s])) OR jmeter_running_threads",
+						"start_dtime": "${run.start_dtime}",
+						"end_dtime": "${run.end_dtime}",
+						"step": "3s"
+					},
+					"yAxis2Match": ".*jmeter_running_threads.*",
+					"rename":[{
+						"query": ".*jmeter_running_threads.*",
+						"replace": "Cuncurent users",
+						"match": true,
+						"regex": true
+					},{
+						"query": ".*",
+						"replace": "Throughput",
+						"match": true,
+						"regex": true
+					}],
+					"name": "Widget"
+				}
+			]
+		},
+		{
+			"style": {
+				"margin": {
+					"isUniform": true,
+					"uniform": 16
+				},
+				"padding": {
+					"isUniform": true,
+					"uniform": 0
+				},
+				"borderRadius": {
+					"uniform": true,
+					"all": 8
+				},
+				"borderStyleColorWidth": {
+					"uniform": true
+				},
+				"borderStyle": {
+					"all": "solid"
+				},
+				"borderWidth": {
+					"all": 1
+				},
+				"borderColor": {
+					"all": "#bfbfbf"
+				},
+				"flexDirection": "wb-flex-column",
+				"alignItems": "wb-flex-align-items-stretch",
+				"justifyContent": "wb-flex-justify-content-start",
+				"flexAlignItem": "wb-flex-item-auto"
+			},
+			"type": "Group",
+			"name": "Panel",
+			"contents": [
+				{
+					"style": {
+						"margin": {
+							"isUniform": true,
+							"uniform": 0
+						},
+						"borderRadius": {
+							"topLeft": 8,
+							"topRight": 8,
+							"bottomLeft": 0,
+							"bottomRight": 0
+						},
+						"borderColor": {
+							"bottom": "none"
+						},
+						"flexAlignItem": "wb-flex-item-auto",
+						"padding": {
+							"isUniform": true,
+							"uniform": 0
+						}
+					},
+					"type": "CommonFeatureToolbar",
+					"name": "Widget",
+					"features": [],
+					"label": "CPU Usage"
+				},
+				{
+					"text": "<p>CPU usage of the nodes (all machines which are used in the test) are illustrated in the following char.</p>",
+					"type": "HtmlText",
+					"name": "Widget",
+					"style": {
+						"borderColor": {
+							"bottom": "none"
+						},
+						"margin": {
+							"isUniform": true,
+							"uniform": 8
+						},
+						"flexAlignItem": "wb-flex-item-auto"
+					}
+				},
+				{
+					"style": {
+						"borderColor": {
+							"bottom": "none"
+						},
+						"flexAlignItem": "wb-flex-item-auto"
+					},
+					"type": "MultiChart",
+					"chart": {
+						"type": "multiChart",
+						"height": 450,
+						"margin": {
+							"top": 50,
+							"right": 75,
+							"bottom": 50,
+							"left": 75
+						},
+						"useVoronoi": false,
+						"clipEdge": false,
+						"duration": 250,
+						"useInteractiveGuideline": true,
+						"xAxis": {
+							"showMaxMin": false,
+							"axisLabel": "Test duration (in second)"
+						},
+						"yAxis1": {
+							"showMaxMin": false,
+							"axisLabel": "CPU usage (Percentage)"
+						},
+						"yAxis2": {
+							"showMaxMin": false,
+							"axisLabel": "Concurent Virtual User"
+						}
+					},
+					"caption": {
+						"enable": true,
+						"html": "<p style=\"text-align: center;\">CPU usage of the SUT and other nodes in test environment</p>"
+					},
+					"xformat": {
+						"type": "DateTime",
+						"format": "%H:%M:%S"
+					},
+					"yformat1": {
+						"type": "Number",
+						"format": ".1f"
+					},
+					"yformat2": {
+						"type": "Number",
+						"format": ".1f"
+					},
+					"query": {
+						"query_range": "100 * (1 - avg by(job,instance)(irate(node_cpu{mode='idle'}[5m]))) OR jmeter_running_threads",
+						"start_dtime": "${run.start_dtime}",
+						"end_dtime": "${run.end_dtime}",
+						"step": "1s"
+					},
+					"yAxis2Match": ".*jmeter_running_threads.*",
+					"rename":[{
+						"query": ".*jmeter_running_threads.*",
+						"replace": "Cuncurent users",
+						"match": true,
+						"regex": true
+					},{
+						"query": ".*injector.*",
+						"replace": "Test machine",
+						"match": true,
+						"regex": true
+					},{
+						"query": ".*db.*",
+						"replace": "Data base node",
+						"match": true,
+						"regex": true
+					},{
+						"query": ".*",
+						"replace": "SUT node",
+						"match": true,
+						"regex": true
+					}],
+					"name": "Widget"
+				}
+			]
+		},
+		{
+			"style": {
+				"margin": {
+					"isUniform": true,
+					"uniform": 16
+				},
+				"padding": {
+					"isUniform": true,
+					"uniform": 0
+				},
+				"borderRadius": {
+					"uniform": true,
+					"all": 8
+				},
+				"borderStyleColorWidth": {
+					"uniform": true
+				},
+				"borderStyle": {
+					"all": "solid"
+				},
+				"borderWidth": {
+					"all": 1
+				},
+				"borderColor": {
+					"all": "#bfbfbf"
+				},
+				"flexDirection": "wb-flex-column",
+				"alignItems": "wb-flex-align-items-stretch",
+				"justifyContent": "wb-flex-justify-content-start",
+				"flexAlignItem": "wb-flex-item-auto"
+			},
+			"type": "Group",
+			"name": "Panel",
+			"contents": [
+				{
+					"style": {
+						"margin": {
+							"isUniform": true,
+							"uniform": 0
+						},
+						"borderRadius": {
+							"topLeft": 8,
+							"topRight": 8,
+							"bottomLeft": 0,
+							"bottomRight": 0
+						},
+						"borderColor": {
+							"bottom": "none"
+						},
+						"flexAlignItem": "wb-flex-item-auto",
+						"padding": {
+							"isUniform": true,
+							"uniform": 0
+						}
+					},
+					"type": "CommonFeatureToolbar",
+					"name": "Widget",
+					"features": [],
+					"label": "Memory Utilization"
+				},
+				{
+					"text": "<p>The memory utilization of SUT node and others are illustrated in the following chart.</p>",
+					"type": "HtmlText",
+					"name": "Widget",
+					"style": {
+						"borderColor": {
+							"bottom": "none"
+						},
+						"margin": {
+							"isUniform": true,
+							"uniform": 8
+						},
+						"flexAlignItem": "wb-flex-item-auto"
+					}
+				},
+				{
+					"style": {
+						"borderColor": {
+							"bottom": "none"
+						},
+						"flexAlignItem": "wb-flex-item-auto"
+					},
+					"type": "MultiChart",
+					"chart": {
+						"type": "multiChart",
+						"height": 450,
+						"margin": {
+							"top": 50,
+							"right": 75,
+							"bottom": 50,
+							"left": 75
+						},
+						"useVoronoi": false,
+						"clipEdge": false,
+						"duration": 250,
+						"useInteractiveGuideline": true,
+						"xAxis": {
+							"showMaxMin": false,
+							"axisLabel": "Test duration (in second)"
+						},
+						"yAxis1": {
+							"showMaxMin": false,
+							"axisLabel": "Memory utilization (Percentage)"
+						},
+						"yAxis2": {
+							"showMaxMin": false,
+							"axisLabel": "Concurent Virtual User"
+						}
+					},
+					"caption": {
+						"html": "<p style=\"text-align: center;\">Memory usage of nodes in the test environment</p>",
+						"enable": true
+					},
+					"xformat": {
+						"type": "DateTime",
+						"format": "%H:%M:%S"
+					},
+					"yformat1": {
+						"type": "Number",
+						"format": ".1f"
+					},
+					"yformat2": {
+						"type": "Number",
+						"format": ".1f"
+					},
+					"query": {
+						"query_range": "100 * (1 - node_memory_MemFree/node_memory_MemTotal) OR jmeter_running_threads",
+						"start_dtime": "${run.start_dtime}",
+						"end_dtime": "${run.end_dtime}",
+						"step": "3s"
+					},
+					"yAxis2Match": ".*jmeter_running_threads.*",
+					"rename":[{
+						"query": ".*jmeter_running_threads.*",
+						"replace": "Cuncurent users",
+						"match": true,
+						"regex": true
+					},{
+						"query": ".*injector.*",
+						"replace": "Test machine",
+						"match": true,
+						"regex": true
+					},{
+						"query": ".*db.*",
+						"replace": "Data base node",
+						"match": true,
+						"regex": true
+					},{
+						"query": ".*",
+						"replace": "SUT node",
+						"match": true,
+						"regex": true
+					}],
+					"name": "Widget"
+				}
+			]
+		},
+		{
+			"style": {
+				"margin": {
+					"isUniform": true,
+					"uniform": 16
+				},
+				"padding": {
+					"isUniform": true,
+					"uniform": 0
+				},
+				"borderRadius": {
+					"uniform": true,
+					"all": 8
+				},
+				"borderStyleColorWidth": {
+					"uniform": true
+				},
+				"borderStyle": {
+					"all": "solid"
+				},
+				"borderWidth": {
+					"all": 1
+				},
+				"borderColor": {
+					"all": "#bfbfbf"
+				},
+				"flexDirection": "wb-flex-column",
+				"alignItems": "wb-flex-align-items-stretch",
+				"justifyContent": "wb-flex-justify-content-start",
+				"flexAlignItem": "wb-flex-item-auto"
+			},
+			"type": "Group",
+			"name": "Panel",
+			"contents": [
+				{
+					"style": {
+						"margin": {
+							"isUniform": true,
+							"uniform": 0
+						},
+						"borderRadius": {
+							"topLeft": 8,
+							"topRight": 8,
+							"bottomLeft": 0,
+							"bottomRight": 0
+						},
+						"borderColor": {
+							"bottom": "none"
+						},
+						"flexAlignItem": "wb-flex-item-auto",
+						"padding": {
+							"isUniform": true,
+							"uniform": 0
+						}
+					},
+					"type": "CommonFeatureToolbar",
+					"name": "Widget",
+					"features": [],
+					"label": "Network Utilization"
+				},
+				{
+					"text": "<p>Network utilization (in byte) is illustrated in the following chart for each node in the test environment</p>",
+					"type": "HtmlText",
+					"name": "Widget",
+					"style": {
+						"borderColor": {
+							"bottom": "none"
+						},
+						"margin": {
+							"isUniform": true,
+							"uniform": 8
+						},
+						"flexAlignItem": "wb-flex-item-auto"
+					}
+				},
+				{
+					"style": {
+						"borderColor": {
+							"bottom": "none"
+						},
+						"flexAlignItem": "wb-flex-item-auto"
+					},
+					"type": "MultiChart",
+					"chart": {
+						"type": "multiChart",
+						"height": 450,
+						"margin": {
+							"top": 50,
+							"right": 75,
+							"bottom": 50,
+							"left": 75
+						},
+						"useVoronoi": false,
+						"clipEdge": false,
+						"duration": 250,
+						"useInteractiveGuideline": true,
+						"xAxis": {
+							"showMaxMin": false,
+							"axisLabel": "Test duration (in second)"
+						},
+						"yAxis1": {
+							"showMaxMin": false,
+							"axisLabel": "Network utilization (byte/second)"
+						},
+						"yAxis2": {
+							"showMaxMin": false,
+							"axisLabel": "Concurent Virtual User"
+						}
+					},
+					"caption": {
+						"html": "<p style=\"text-align: center;\">Network utilization of nodes in the system environment</p>",
+						"enable": true
+					},
+					"xformat": {
+						"type": "DateTime",
+						"format": "%H:%M:%S"
+					},
+					"yformat1": {
+						"type": "Number",
+						"format": ".3s"
+					},
+					"yformat2": {
+						"type": "Number",
+						"format": ".3s"
+					},
+					"query": {
+						"query_range": "sum(irate(node_network_transmit_bytes[60s]))by(device, job) + sum(irate(node_network_receive_bytes[60s]))by(device, job) OR jmeter_running_threads",
+						"start_dtime": "${run.start_dtime}",
+						"end_dtime": "${run.end_dtime}",
+						"step": "3s"
+					},
+					"yAxis2Match": ".*jmeter_running_threads.*",
+					"rename":[{
+						"query": ".*jmeter_running_threads.*",
+						"replace": "Cuncurent users",
+						"match": true,
+						"regex": true
+					},{
+						"query": ".*injector.*",
+						"replace": "Test machine",
+						"match": true,
+						"regex": true
+					},{
+						"query": ".*db.*",
+						"replace": "Data base node",
+						"match": true,
+						"regex": true
+					},{
+						"query": ".*",
+						"replace": "SUT node",
+						"match": true,
+						"regex": true
+					}],
+					"name": "Widget"
+				}
+			]
+		}
+	]
+}

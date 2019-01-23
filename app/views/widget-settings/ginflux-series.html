@@ -1,0 +1,52 @@
+<div
+	class="md-whiteframe-2dp"
+	layout-padding
+	layout-margin
+	layout="column"
+	ng-repeat="series in ctrl.series track by $index">
+	<md-input-container>
+		<label translate>Title</label>
+		<input
+			type="text"
+			aria-label="Query title"
+			ng-model="series.title"
+			ng-model-options="{updateOn : 'change'}"
+			ng-change="ctrl.seriesChanged()">
+		</textarea>
+	</md-input-container>
+	<md-input-container>
+		<label translate>Description</label>
+		<textarea
+			type="text"
+			aria-label="Query description"
+			rows="2"
+			ng-model="series.description"
+			ng-model-options="{updateOn : 'change'}"
+			ng-change="ctrl.seriesChanged()">
+		</textarea>
+	</md-input-container>
+	
+	<md-input-container>
+		<label translate>Type</label>
+		<input
+			type="text"
+			ng-model="series.type"
+			ng-change="ctrl.seriesChanged()">
+	</md-input-container>
+	
+	<md-input-container>
+		<label translate>Axis</label>
+		<input
+			type="text"
+			ng-model="series.yAxis"
+			ng-change="ctrl.seriesChanged()">
+	</md-input-container>
+	
+	<wb-ui-setting-color
+		title="Color"
+		wb-ui-setting-clear-button="true"
+		wb-ui-setting-preview="true"
+		ng-model="series.color"
+		ng-change="ctrl.seriesChanged()">
+	</wb-ui-setting-color>
+</div>

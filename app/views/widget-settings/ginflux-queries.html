@@ -1,0 +1,142 @@
+<div
+	class="md-whiteframe-2dp"
+	layout-padding
+	layout-margin
+	layout="column"
+	ng-repeat="query in ctrl.queries track by $index">
+	<md-input-container>
+		<label translate>Title</label>
+		<input
+			type="text"
+			aria-label="Query title"
+			ng-model="query.title"
+			ng-model-options="{updateOn : 'change'}"
+			ng-change="ctrl.queryChanged()">
+		</textarea>
+	</md-input-container>
+	<md-input-container>
+		<label translate>Description</label>
+		<textarea
+			type="text"
+			aria-label="Query description"
+			rows="2"
+			ng-model="query.description"
+			ng-model-options="{updateOn : 'change'}"
+			ng-change="ctrl.queryChanged()">
+		</textarea>
+	</md-input-container>
+	<md-input-container>
+		<label translate>Index attribute</label>
+		<input
+			type="text"
+			aria-label="Query index value"
+			ng-model="query.index"
+			ng-model-options="{updateOn : 'change'}"
+			ng-change="ctrl.queryChanged()">
+		</textarea>
+	</md-input-container>
+	<md-input-container>
+		<label translate>URL</label>
+		<input
+			type="text"
+			aria-label="Query url"
+			ng-model="query.url"
+			ng-model-options="{updateOn : 'change'}"
+			ng-change="ctrl.queryChanged()">
+		</textarea>
+	</md-input-container>
+	<md-input-container>
+		<label translate>Query</label>
+		<textarea
+			type="text"
+			aria-label="Query SQL"
+			rows="2"
+			ng-model="query.sql"
+			ng-model-options="{updateOn : 'change'}"
+			ng-change="ctrl.queryChanged()">
+		</textarea>
+	</md-input-container>
+	<md-switch 
+		ng-model="query.useAsContext"
+		ng-change="ctrl.queryChanged()"
+		aria-label="Use query as context">
+		<span translate>Use query result as context</span>
+	</md-switch>
+	<md-switch 
+		ng-model="query.visible"
+		ng-change="ctrl.queryChanged()"
+		aria-label="Visible">
+		<span translate>Visible</span>
+	</md-switch>
+</div>
+
+<div
+	class="md-whiteframe-2dp"
+	layout-padding
+	layout-margin
+	layout="column"
+	ng-show="showAddQuery">
+	<md-input-container>
+		<label translate>Title</label>
+		<input
+			type="text"
+			aria-label="Query title"
+			ng-model="newQuery.title">
+		</textarea>
+	</md-input-container>
+	<md-input-container>
+		<label translate>Description</label>
+		<textarea
+			type="text"
+			aria-label="Query description"
+			rows="2"
+			ng-model="newQuery.description">
+		</textarea>
+	</md-input-container>
+	<md-input-container>
+		<label translate>URL</label>
+		<input
+			type="text"
+			aria-label="Query url"
+			ng-model="newQuery.url">
+		</textarea>
+	</md-input-container>
+	<md-input-container>
+		<label translate>Query</label>
+		<textarea
+			type="text"
+			aria-label="Query SQL"
+			rows="2"
+			ng-model="newQuery.sql">
+		</textarea>
+	</md-input-container>
+	<md-switch 
+		ng-model="newQuery.useAsContenxt"
+		aria-label="Use query as context">
+		<span translate>Use query result as context</span>
+	</md-switch>
+	<md-switch 
+		ng-model="newQuery.visible"
+		aria-label="Visible">
+		<span translate>Visible</span>
+	</md-switch>
+	<div
+		layout="row">
+		<span flex></span>
+		<md-button
+			ng-click="ctrl.addQuery(newQuery)">
+			<wb-icon>add</wb-icon>
+		</md-button>
+	</div>
+</div>
+
+
+<div
+	layout="row"
+	ng-show="!showAddQuery">
+	<span flex></span>
+	<md-button
+		ng-click="showAddQuery=!showAddQuery">
+		<wb-icon>add</wb-icon>
+	</md-button>
+</div>

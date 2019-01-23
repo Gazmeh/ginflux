@@ -1,0 +1,24 @@
+/**
+ * Created by mgh on 5/24/18.
+ */
+
+form.editable-wrap {
+  width: 100%;
+}
+
+input.editable-input {
+  width: 100% !important;
+}
+
+md-input-container.editable-controls {
+  display: flex;
+  margin-top: 0px;
+  flex-direction: row-reverse;
+}
+
+.highlight-edit-box md-input-container {
+  /*todo: border color must be adapted from theme as md-primary*/
+  border: 1px dashed rgb(0, 105, 92);
+  border-radius: 5px;
+  padding-top: 8px;
+}

@@ -1,0 +1,43 @@
+<md-dialog 
+    layout="column"
+    ng-cloak>
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<wb-icon>warning</wb-icon>
+			<h2 translate>{{app.title}}</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="answer(true)">
+				<wb-icon aria-label="Done">done</wb-icon>
+			</md-button>
+			<md-button class="md-icon-button" ng-click="cancel()">
+				<wb-icon aria-label="Close dialog">close</wb-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-dialog-content 
+		layout="row" 
+       	layout-padding
+		flex>
+		<div
+			layout="column"
+			flex>
+			<md-input-container>
+				<label translate>InfluxDB</label>
+				<input 
+					ng-model="app.setting.ginfluxUrl">
+			</md-input-container>
+			<md-input-container>
+				<label translate>User</label>
+				<input 
+					type="text"
+					ng-model="app.setting.ginfluxUser">
+			</md-input-container>
+			<md-input-container>
+				<label translate>Password</label>
+				<input 
+					type="password"
+					ng-model="app.setting.ginfluxPassword">
+			</md-input-container>
+		</div>
+	</md-dialog-content>
+</md-dialog>

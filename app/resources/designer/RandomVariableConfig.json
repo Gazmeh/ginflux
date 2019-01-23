@@ -1,0 +1,36 @@
+{
+	"@guiclass": "TestBeanGUI",
+	"@testclass": "RandomVariableConfig",
+	"@testname": "name",
+	"@enabled": true,
+	"stringProp": [
+		{
+			"@name": "TestPlan.comments",
+			"$": "comment"
+		},
+		{
+			"@name": "maximumValue",
+			"$": "1000"
+		},
+		{
+			"@name": "minimumValue",
+			"$": "1"
+		},
+		{
+			"@name": "outputFormat",
+			"$": "format"
+		},
+		{
+			"@name": "randomSeed",
+			"$": "1000"
+		},
+		{
+			"@name": "variableName",
+			"$": "var name"
+		}
+	],
+	"boolProp": {
+		"@name": "perThread",
+		"$": "false"
+	}
+}

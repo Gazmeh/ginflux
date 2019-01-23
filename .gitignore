@@ -1,0 +1,14 @@
+/node_modules
+/dist
+/.tmp
+/.sass-cache
+/bower_components
+
+# KDE
+.directory
+
+# Eclipse
+/.settings/
+/*.zip
+/package-lock.json
+/coverage/

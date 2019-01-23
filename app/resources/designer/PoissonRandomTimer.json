@@ -1,0 +1,16 @@
+{
+	"@guiclass": "PoissonRandomTimerGui",
+	"@testclass": "PoissonRandomTimer",
+	"@testname": "Poisson Random Timer",
+	"@enabled": true,
+	"stringProp": [
+		{
+			"@name": "ConstantTimer.delay",
+			"$": "300"
+		},
+		{
+			"@name": "RandomTimer.range",
+			"$": "100"
+		}
+	]
+}

@@ -1,0 +1,29 @@
+{
+	"@guiclass": "ThroughputControllerGui",
+	"@testclass": "ThroughputController",
+	"@testname": "name",
+	"@enabled": true,
+	"intProp": [
+		{
+			"@name": "ThroughputController.style",
+			"$": "1"
+		},
+		{
+			"@name": "ThroughputController.maxThroughput",
+			"$": "1"
+		}
+	],
+	"boolProp": {
+		"@name": "ThroughputController.perThread",
+		"$": "false"
+	},
+	"FloatProperty": {
+		"name": "ThroughputController.percentThroughput",
+		"value": 1,
+		"savedValue": 0
+	},
+	"stringProp": {
+		"@name": "TestPlan.comments",
+		"$": "comment"
+	}
+}

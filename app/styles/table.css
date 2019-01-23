@@ -1,0 +1,32 @@
+/*
+ * Customize tables
+ */
+ table.gh-table tr td,
+ table.gh-table tr td * {
+ 	padding: 0;
+ 	margin: 0;
+ }
+ table.gh-table tr td *{
+ 	-webkit-padding-end: 5px;
+ }
+
+ table.gh-table .md-errors-spacer{
+ 	min-height: 0;
+ }
+
+ table.gh-center-align {
+ 	text-align: center;
+ }
+
+table.gh-table md-select-value{
+  border:none !important;
+}
+table.gh-table input{
+  border:none !important;
+}
+table.gh-table-padding tr td{
+  padding: 4px !important;
+}
+table.gh-table-padding th{
+  padding: 4px !important;
+}
