@@ -1,0 +1,41 @@
+<md-dialog 
+    layout="column"
+    ng-cloak>
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<wb-icon>settings</wb-icon>
+			<h2 translate>Variables</h2>
+			<span style="min-width: 30px" flex></span>
+			<span>{{ctrl.currentVariableSet.title}}</span>
+		</div>
+	</md-toolbar>
+	<md-dialog-content 
+		layout="column" 
+		flex>
+		<md-content>
+			<table
+				style="width: 100%">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Key</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in ctrl.currentVariableSet.items track by $index">
+						<td>
+							<md-checkbox
+								ng-disabled="true"
+								ng-model="item.active"
+								aria-label="Active the variable">
+							</md-checkbox>
+						</td>
+						<td>{{item.key}}</td>
+						<td>{{item.value}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</md-content>
+	</md-dialog-content>
+</md-dialog>

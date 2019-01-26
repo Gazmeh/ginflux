@@ -64,7 +64,78 @@ angular.module('ginfluxApp')
     this.updateReportConfig = function(){
         // XXX: maso, 2018: open dialog and update the report
     };
-
+    
+    /**
+     * Adds new variable set
+     */
+    this.addVariableSet = function(){
+        var ctrl = this;
+        prompt('Variable set name:', 'Variables')//
+        .then(function(text){
+            var result = $ghReport.addVariableSet({
+                title: text
+            });
+            ctrl.setCurrentVariableSet(result);
+            ctrl.reloadVariables();
+        });
+    };
+    
+    /**
+     * Sets variable set
+     */
+    this.setCurrentVariableSet = function(variableSet){
+        this.currentVariableSet = variableSet;
+        $ghReport.setCurrentVariableSet(variableSet);
+    };
+    
+    /**
+     * Delete variable set
+     */
+    this.deleteVariableSet = function(){
+        $ghReport.removeVariableSet(this.currentVariableSet);
+        this.reloadVariables();
+    };
+    
+    /**
+     * reload variables
+     */
+    this.reloadVariables = function(){
+        this.variableSets = $ghReport.getVariableSets();
+        this.currentVariableSet = $ghReport.getCurrentVariableSet();
+    };
+    
+    /**
+     * Display a tool to manage variables
+     */
+    this.managesVariableSets = function(){
+        $navigator.openDialog({
+            templateUrl: 'views/dialogs/ginflux-mange-variable-sets.html',
+            controller: 'GInfluxVariableSetCtrl', 
+            controllerAs: 'ctrl',
+            parent : angular.element(document.body),
+            clickOutsideToClose : true,
+            fullscreen: true,
+            multiple:true,
+            scope: $rootScope
+        });
+    };
+    
+    /**
+     * Display list of variables
+     */
+    this.viewVariableSets = function(){
+        $navigator.openDialog({
+            templateUrl: 'views/dialogs/ginflux-view-variable-set.html',
+            controller: 'GInfluxVariableSetCtrl', 
+            controllerAs: 'ctrl',
+            parent : angular.element(document.body),
+            clickOutsideToClose : true,
+            fullscreen: true,
+            multiple:true,
+            scope: $rootScope
+        });
+    };
+    
     var ctrl = this;
     $actions.newAction({
         id: 'ginflux.local.report.save',
@@ -98,9 +169,9 @@ angular.module('ginfluxApp')
         groups: ['mb.toolbar.menu'],
         scope: $scope
     });
-
     
     
     // call supper class init
     this.init();
+    this.reloadVariables();
 });

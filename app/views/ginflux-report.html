@@ -1,0 +1,150 @@
+<div
+	layout="column"
+	flex>
+	<!-- Extra toolbar: contains more actions -->
+	<md-toolbar
+		id="report-extra-action"
+		class="md-hue-2">
+		<div 
+			class="md-toolbar-tools"
+			layout="row">
+			<span flex></span>
+			<md-divider></md-divider>
+			<md-input-container>
+				<md-select 
+					ng-model="ctrl.currentVariableSet" 
+					ng-change="ctrl.setCurrentVariableSet(ctrl.currentVariableSet)"
+					md-selected-text="{{item.title}}">
+					<md-option 
+						ng-repeat="item in ctrl.variableSets track by $index" 
+						ng-value="item">{{item.title}}</md-option>
+				</md-select>
+			</md-input-container>
+			<md-button 
+				ng-click="ctrl.viewVariableSets()"
+				class="md-icon-button" 
+				aria-label="Display current variable set">
+				<wb-icon>visibility</wb-icon>
+			</md-button>
+			<md-button 
+				ng-click="ctrl.managesVariableSets()"
+				class="md-icon-button" 
+				aria-label="Manage variable sets">
+				<wb-icon>settings</wb-icon>
+			</md-button>
+			<md-button 
+				ng-click="ctrl.addVariableSet()"
+				class="md-icon-button" 
+				aria-label="Add a variable sets">
+				<wb-icon>add</wb-icon>
+			</md-button>
+			<md-button 
+				ng-click="ctrl.deleteVariableSet()"
+				class="md-icon-button" 
+				aria-label="Delete the current variable sets">
+				<wb-icon>delete</wb-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+
+	<div 
+		layout="row" 
+		flex>
+		<!--left toolbar-->
+		<md-toolbar 
+			id="content-editor-vertical-toolbar"
+			ng-if="editable"
+			class="md-hue-2"
+			layout="column"
+			layout-align="start stretch"
+			style="width: 48px;">
+		
+		    <md-button
+		        id="left-toolbar-add-icon"
+		        class="md-icon-button"
+		        ng-click="ctrl.toggleWidgetsView()">
+		        <wb-icon>add</wb-icon>
+		        <md-tooltip 
+		        	md-direction="{{app.dir==='rtl' ? 'left' : 'right'}}" 
+		        	md-delay="1500">
+		        	<span translate>Add a new widget</span>
+				</md-tooltip>
+		    </md-button>
+		    <md-button
+		        id="left-toolbar-add-icon"
+		        class="md-icon-button"
+		        ng-click="ctrl.toggleSettingsView()">
+		        <wb-icon>build</wb-icon>
+		        <md-tooltip md-direction="{{app.dir==='rtl' ? 'left' : 'right'}}" md-delay="1500">{{'Show settings dialog to chagen settings of a widget' | translate}}</md-tooltip>
+		    </md-button>
+		
+		    <md-divider></md-divider>
+		
+		    <md-button 
+		        class="md-icon-button"
+		        ng-click="ctrl.togglePageSetting()">
+		        <wb-icon>settings_applications</wb-icon>
+		        <md-tooltip md-direction="{{app.dir==='rtl' ? 'left' : 'right'}}" md-delay="1500">{{'Show settings of main page' | translate}}</md-tooltip>
+		    </md-button>
+		
+		    <md-divider></md-divider>
+		
+		    <md-button 
+		        class="md-icon-button"
+		        ng-click="ctrl.openHelp()">
+		        <wb-icon>help</wb-icon>
+		        <md-tooltip md-direction="{{app.dir==='rtl' ? 'left' : 'right'}}" md-delay="1500">{{'Show help' | translate}}</md-tooltip>
+		    </md-button>
+	
+		    <md-divider></md-divider>
+	
+			<!-- Widget actions -->
+			<md-button ng-repeat="action in actions"
+			    class="md-icon-button"
+			    ng-disabled="!selectedWidget"
+			    ng-click="action.action()">
+			    <wb-icon>{{action.icon}}</wb-icon>
+			    <md-tooltip md-direction="bottom" md-delay="1500">{{action.description}}</md-tooltip>
+			</md-button>
+			<md-button 
+			    class="md-icon-button"
+			    ng-disabled="!selectedWidget"
+			    ng-click="selectedWidget.delete()">
+			    <wb-icon>delete</wb-icon>
+			    <md-tooltip md-direction="bottom" md-delay="1500">delete the widget</md-tooltip>
+			</md-button>
+			<md-button 
+			    class="md-icon-button"
+			    ng-disabled="!selectedWidget"
+			    ng-click="selectedWidget.clone()">
+			    <wb-icon>content_copy</wb-icon>
+			    <md-tooltip md-direction="bottom" md-delay="1500">clone the widget</md-tooltip>
+			</md-button>
+		    
+		    <span flex></span>
+		    
+		    <md-divider></md-divider>
+		    
+			<md-button 
+			    class="md-icon-button"
+			    flex="10"
+			    ng-click="ctrl.toggleTemplatesView()">
+			    <wb-icon>perm_media</wb-icon>
+			    <md-tooltip md-direction="{{app.dir==='rtl' ? 'left' : 'right'}}" md-delay="1500">Existing templates</md-tooltip>
+			</md-button>
+		</md-toolbar>
+		
+		<!--main content-->
+		<md-content 
+			id="content-editor-veiw"
+			flex>
+			<wb-group
+				style="overflow: hiden;"
+				wb-editable="editable" 
+				wb-on-model-select="ctrl.loadSettings($event)"
+				ng-model="model">
+			</wb-group>
+		</md-content>
+	
+	</div>
+</div>
