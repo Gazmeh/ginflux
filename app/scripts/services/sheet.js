@@ -185,10 +185,10 @@ angular.module('ginfluxApp')
 	    }
 	    
 	    // justify
-	    for(var i = 0; i < values.length; i++){
-	        values[i][column] -= min;
+	    for(var j = 0; j < values.length; j++){
+	        values[j][column] -= min;
 	    }
-	}
+	};
 
 	// public methods
 	this.formatData = formatData;

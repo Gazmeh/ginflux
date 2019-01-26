@@ -277,9 +277,13 @@ angular.module('ginfluxApp')//
         var data = columns.indexOf(key.column);
         var newValues = $sheet.copyColumns(values, [index, data]);
         // justify
-        if(key.isJustify){
+        if(key.isJustifyX){
+            $sheet.justify(newValues, 0);
+        }
+        if(key.isJustifyY){
             $sheet.justify(newValues, 1);
         }
+        
         return newValues;
     };
 

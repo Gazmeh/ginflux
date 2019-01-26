@@ -394,6 +394,16 @@ angular.module('ginfluxApp')//
                 message: 'Url is empty'
             };
         }
+
+        var context = {};
+        var variables = $ghReport.getCurrentVariableSet();
+        angular.forEach(variables.items, function(item){
+            context[item.key] = item.value;
+        });
+
+        Mustache.parse(url, ['{', '}']);
+        url = Mustache.render(url, context);
+        
         $sce.trustAsUrl(url);
         return url;
     };
