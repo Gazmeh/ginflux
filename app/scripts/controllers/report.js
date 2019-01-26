@@ -116,7 +116,6 @@ angular.module('ginfluxApp')
             clickOutsideToClose : true,
             fullscreen: true,
             multiple:true,
-            scope: $rootScope
         });
     };
     
@@ -132,7 +131,6 @@ angular.module('ginfluxApp')
             clickOutsideToClose : true,
             fullscreen: true,
             multiple:true,
-            scope: $rootScope
         });
     };
     
