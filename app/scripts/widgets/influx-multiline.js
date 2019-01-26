@@ -275,7 +275,12 @@ angular.module('ginfluxApp')//
         // copy column
         var index = columns.indexOf(this.getQueryIndex(query));
         var data = columns.indexOf(key.column);
-        return $sheet.copyColumns(values, [index, data]);
+        var newValues = $sheet.copyColumns(values, [index, data]);
+        // justify
+        if(key.isJustify){
+            $sheet.justify(newValues, 1);
+        }
+        return newValues;
     };
 
 });

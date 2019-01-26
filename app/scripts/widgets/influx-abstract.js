@@ -316,10 +316,6 @@ angular.module('ginfluxApp')//
         
         // load refresh context
         var context = this.getQueryContext();
-        var variables = $ghReport.getCurrentVariableSet();
-        angular.forEach(variables.items, function(item){
-            context[item.key] = item.value;
-        });
         var sql = Mustache.render(query.sql, context);
         return $http({
             method: 'GET',
@@ -341,7 +337,13 @@ angular.module('ginfluxApp')//
      * Local context
      */
     this.getQueryContext = function(){
-        return this.getModelProperty('context');
+        var context = this.getModelProperty('context');
+        context = _.clone(context);
+        var variables = $ghReport.getCurrentVariableSet();
+        angular.forEach(variables.items, function(item){
+            context[item.key] = item.value;
+        });
+        return context;
     };
 
     /*

@@ -174,6 +174,21 @@ angular.module('ginfluxApp')
 			sheet.values[i][column] = text + sheet.values[i][column];
 		}
 	}
+	
+	this.justify = function(values, column){
+	    // find min
+	    var min = values[0][column];
+	    for(var i = 0; i < values.length; i++){
+	        if(min > values[i][column]){
+	            min = values[i][column];
+	        }
+	    }
+	    
+	    // justify
+	    for(var i = 0; i < values.length; i++){
+	        values[i][column] -= min;
+	    }
+	}
 
 	// public methods
 	this.formatData = formatData;

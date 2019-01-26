@@ -49,4 +49,10 @@
 		ng-model="series.color"
 		ng-change="ctrl.seriesChanged()">
 	</wb-ui-setting-color>
+
+	<md-switch 
+		ng-model="series.isJustify"
+	    ng-change="ctrl.seriesChanged()"
+		translate>Justify</md-switch>
+		
 </div>
