@@ -175,7 +175,7 @@ angular.module('ginfluxApp')
 		}
 	}
 	
-	this.justify = function(values, column){
+	this.adjust = function(values, column){
 	    // find min
 	    var min = values[0][column];
 	    for(var i = 0; i < values.length; i++){
@@ -184,7 +184,7 @@ angular.module('ginfluxApp')
 	        }
 	    }
 	    
-	    // justify
+	    // adjust
 	    for(var j = 0; j < values.length; j++){
 	        values[j][column] -= min;
 	    }

@@ -27,6 +27,58 @@ angular.module('ginfluxApp')
  */
 .run(function($widget, $settings) {
 
+    /*
+     * This is default chart configuration. Any new Chart is design based
+     * this option
+     */
+    var defaultChart = {
+            height: 700,
+            legend: {
+                enable: true,
+                position: 'top',
+                margin: {
+                    top: 10,
+                    left: 0,
+                    right: 0,
+                    bottom: 10
+                }
+            },
+            margin: {
+                top: 100,
+                left: 100,
+                right: 100,
+                bottom: 100,
+            },
+            x: {
+                format: {
+                    type: 'Time', 
+                    specifier: 'HH:mm:ss'
+                },
+                label: 'Test time',
+                rotateLabels: 0
+            },
+            y: {
+                label: 'Mesurement', 
+                format: {
+                    type: 'Number', 
+                    specifier: '0.2s'
+                }, 
+                rotateLabels: '0', 
+                min: '0', 
+                max: '0'
+            },
+            y2: {
+                label: 'Mesurement', 
+                format: {
+                    type: 'Number', 
+                    specifier: '0.2s'
+                }, 
+                rotateLabels: '0', 
+                min: '0', 
+                max: '0'
+            }
+    };
+
     /**
      * @ngdoc Widget Groups
      * @name Gazmeh Report
@@ -60,10 +112,10 @@ angular.module('ginfluxApp')
             queries: [{
                 title: 'Last 10 samples',
                 description: 'Default query',
-                sql: 'SELECT * FROM test_run_803.autogen.samples LIMIT 10',
-                url: 'http://195.146.59.40:8086/query',
+                sql: 'SELECT * FROM {db}..{mesurement} LIMIT 10',
+                url: '{&host}',
                 index: 'time',
-                useAsContenxt: false,
+                useAsContext: false,
                 visible: true
             }]
         },
@@ -91,27 +143,22 @@ angular.module('ginfluxApp')
         groups: ['ginflux'],
         setting: ['ginflux-queries', 'ginflux-series', 'ginflux-linechart'],
         model: {
-            url: 'http://195.146.59.40:8086/query',
             queries: [{
                 title: 'Mean of response time',
                 description: 'Default query',
-                sql: 'SELECT mean(response_time) as response_time, FIRST(time_stamp) AS time_stamp FROM test_run_803..samples WHERE time > {start}ms AND time < {end}ms GROUP BY time(10s)',
-                index: 'time_stamp',
-                useAsContenxt: false,
+                sql: 'SELECT mean(response_time) FROM {db}..{mesurement} WHERE time > {start}ms AND time < {end}ms GROUP BY time(10s)',
+                url: '{&host}',
+                useAsContext: false,
                 visible: true
             }, {
-                title: 'Start time',
-                description: 'Select start time stamp of the samples',
-                sql: 'SELECT FIRST(time_stamp) AS "start" FROM test_run_803..samples',
-                useAsContenxt: true,
+                title: 'Test time',
+                description: 'Select start and end time stamp of the samples',
+                sql: 'SELECT FIRST(time_stamp) AS "start", LAST(time_stamp) AS "end" FROM {db}..{mesurement}',
+                url: '{&host}',
+                useAsContext: true,
                 visible: false
-            }, {
-                title: 'End time',
-                description: 'Select ent time stamp of the samples',
-                sql: 'SELECT LAST(time_stamp) AS "end" FROM test_run_803..samples',
-                useAsContenxt: true,
-                visible: false
-            }]
+            }],
+            chart: defaultChart
         },
         // functional properties
         templateUrl: 'views/widgets/ginflux-multiline.html',
@@ -141,23 +188,19 @@ angular.module('ginfluxApp')
             queries: [{
                 title: 'Mean of response time',
                 description: 'Default query',
-                sql: 'SELECT sum(success) as count FROM test_run_803..samples WHERE time > {start}ms AND time < {end}ms GROUP BY time(10s), tag_name',
-                index: 'time_stamp',
-                useAsContenxt: false,
+                sql: 'SELECT sum(success) as count FROM {db}..{mesurement} WHERE time > {start}ms AND time < {end}ms GROUP BY time(10s), tag_name',
+                url: '{&host}',
+                useAsContext: false,
                 visible: true
             }, {
-                title: 'Start time',
+                title: 'Test time',
                 description: 'Select start time stamp of the samples',
-                sql: 'SELECT FIRST(time_stamp) AS "start" FROM test_run_803..samples',
+                sql: 'SELECT FIRST(time_stamp) AS "start", LAST(time_stamp) AS "end" FROM {db}..{mesurement}',
+                url: '{&host}',
                 useAsContext: true,
                 visible: false
-            }, {
-                title: 'End time',
-                description: 'Select ent time stamp of the samples',
-                sql: 'SELECT LAST(time_stamp) AS "end" FROM test_run_803..samples',
-                useAsContext: true,
-                visible: false
-            }]
+            }],
+            chart: defaultChart
         },
         // functional properties
         templateUrl: 'views/widgets/ginflux-pie.html',
@@ -166,7 +209,7 @@ angular.module('ginfluxApp')
         help: '',
         helpId: 'wb-widget-group'
     });
-    
+
 
     /**
      * @ngdoc Widgets
@@ -185,27 +228,22 @@ angular.module('ginfluxApp')
         groups: ['ginflux'],
         setting: ['ginflux-queries', 'ginflux-series', 'ginflux-boxplot'],
         model: {
-            url: 'http://195.146.59.40:8086/query',
             queries: [{
                 title: 'Mean of response time',
                 description: 'Default query',
-                sql: 'SELECT min(response_time) as q0, mean(response_time) as q1, mean(reponse_time) as q2, mean(response_time) as q3, max(response_time) as q4 FROM test_run_803..samples WHERE time > {start}ms AND time < {end}ms GROUP BY time(10s)',
-                index: 'time_stamp',
-                useAsContenxt: false,
+                sql: 'SELECT min(response_time) as q0, mean(response_time) as q1, mean(reponse_time) as q2, mean(response_time) as q3, max(response_time) as q4 FROM {db}..{mesurement} WHERE time > {start}ms AND time < {end}ms GROUP BY time(10s)',
+                url: '{&host}',
+                useAsContext: false,
                 visible: true
             }, {
-                title: 'Start time',
+                title: 'Test time',
                 description: 'Select start time stamp of the samples',
-                sql: 'SELECT FIRST(time_stamp) AS "start" FROM test_run_803..samples',
+                sql: 'SELECT FIRST(time_stamp) AS "start", LAST(time_stamp) AS "end" FROM {db}..{mesurement}',
+                url: '{&host}',
                 useAsContext: true,
                 visible: false
-            }, {
-                title: 'End time',
-                description: 'Select ent time stamp of the samples',
-                sql: 'SELECT LAST(time_stamp) AS "end" FROM test_run_803..samples',
-                useAsContext: true,
-                visible: false
-            }]
+            }],
+            chart: defaultChart
         },
         // functional properties
         templateUrl: 'views/widgets/ginflux-box.html',
@@ -244,23 +282,23 @@ angular.module('ginfluxApp')
                 // load model
                 modelUpdated();
             };
-            
+
             this.queryChanged = function(){
                 this.setProperty('queries', this.queries);
             };
-            
+
             this.addQuery = function(query){
                 this.queries.push(query);
                 this.queryChanged();
             };
-            
+
             this.removeQuery = function(index){
                 this.queries.splice(index, 1);
                 this.queryChanged();
             };
         }
     });
-    
+
     $settings.newPage({
         type: 'ginflux-series',
         label: 'Sereis',
@@ -285,13 +323,13 @@ angular.module('ginfluxApp')
                 // load model
                 modelUpdated();
             };
-            
+
             this.seriesChanged = function(){
                 this.setProperty('series', this.series);
             };
         }
     });
-    
+
     /*
      * Use as controller for all chart configurations
      * @ngInject
@@ -320,8 +358,8 @@ angular.module('ginfluxApp')
                 // load model
                 this.chart = this.getProperty('chart') || {};
             };
-            
-            
+
+
             this.chartChanged = function(){
                 this.setProperty('chart', this.chart);
             };
@@ -351,8 +389,8 @@ angular.module('ginfluxApp')
                 // load model
                 this.chart = this.getProperty('chart') || {};
             };
-            
-            
+
+
             this.chartChanged = function(){
                 this.setProperty('chart', this.chart);
             };
@@ -382,8 +420,8 @@ angular.module('ginfluxApp')
                 // load model
                 this.chart = this.getProperty('chart') || {};
             };
-            
-            
+
+
             this.chartChanged = function(){
                 this.setProperty('chart', this.chart);
             };

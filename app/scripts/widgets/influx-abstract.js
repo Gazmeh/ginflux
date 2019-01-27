@@ -115,7 +115,7 @@ angular.module('ginfluxApp')//
                 },
                 loading: {
                     _onEnter: function () {
-                        ctrl.runQueries();
+                        ctrl.runQueries();  
                     },
                     onSuccess: 'loaded',
                     onError: 'error'
@@ -321,6 +321,7 @@ angular.module('ginfluxApp')//
             method: 'GET',
             url: url,
             params: {
+                epoch: 's',
                 q: sql
             }
         })
@@ -334,10 +335,10 @@ angular.module('ginfluxApp')//
     /*
      * INTERNAL
      * 
-     * Local context
+     * Local context from model (saved) or current variable set
      */
     this.getQueryContext = function(){
-        var context = this.getModelProperty('context');
+        var context = this.getModelProperty('context') || {};
         context = _.clone(context);
         var variables = $ghReport.getCurrentVariableSet();
         angular.forEach(variables.items, function(item){

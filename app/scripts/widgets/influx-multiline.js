@@ -268,6 +268,10 @@ angular.module('ginfluxApp')//
         series.column === key.column;
     };
 
+    /*
+     * Restore data from query catch and generate series data based on the input
+     * key
+     */
     this.getValues = function(key) {
         var query = this.getQueryByFingerprint(key.fingerPrint);
         var columns = this.getCacheSeriesColumns(query, key.resultIndex, key.seriesIndex);
@@ -277,11 +281,11 @@ angular.module('ginfluxApp')//
         var data = columns.indexOf(key.column);
         var newValues = $sheet.copyColumns(values, [index, data]);
         // justify
-        if(key.isJustifyX){
-            $sheet.justify(newValues, 0);
+        if(key.isAdjustX){
+            $sheet.adjust(newValues, 0);
         }
-        if(key.isJustifyY){
-            $sheet.justify(newValues, 1);
+        if(key.isAdjustY){
+            $sheet.adjust(newValues, 1);
         }
         
         return newValues;
