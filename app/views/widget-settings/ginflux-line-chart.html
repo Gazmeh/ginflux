@@ -1,7 +1,7 @@
 <section class="setting-page">
 	<!-- Size -->
 	<fieldset>
-		<legend>Size</legend>
+		<legend translate>Size</legend>
 		<md-input-container>
 			<label translate>Height</label>
 			<input type="number" ng-model="ctrl.chart.height" ng-change="ctrl.chartChanged()">
@@ -10,7 +10,7 @@
 
 	<!-- Margin -->
 	<fieldset>
-		<legend>Margin</legend>
+		<legend translate>Margin</legend>
 		<md-input-container>
 			<label translate>Top</label>
 			<input type="number" ng-model="ctrl.chart.margin.top" ng-change="ctrl.chartChanged()">
@@ -29,10 +29,9 @@
 		</md-input-container>
 	</fieldset>
 
-
 	<!-- Legend -->
 	<fieldset>
-		<legend>Legend</legend>
+		<legend translate>Legend</legend>
 		<md-input-container>
 			<md-checkbox ng-model="ctrl.chart.legend.enable" ng-change="ctrl.chartChanged()">
 				<span translate>Show Legend</span>
@@ -62,7 +61,7 @@
 
 	<!-- X -->
 	<fieldset>
-		<legend>X-Axis</legend>
+		<legend translate>X-Axis</legend>
 		<md-input-container>
 			<label translate>Label</label>
 			<input type="text" ng-model="ctrl.chart.x.label" ng-change="ctrl.chartChanged()">
@@ -93,7 +92,7 @@
 
 	<!-- Y -->
 	<fieldset>
-		<legend>Y-Axis</legend>
+		<legend translate>Y-Axis (Left)</legend>
 		<md-input-container>
 			<label translate>Label</label>
 			<input type="text" ng-model="ctrl.chart.y.label" ng-change="ctrl.chartChanged()">
@@ -127,7 +126,7 @@
 
 	<!-- Y2 -->
 	<fieldset>
-		<legend>Y2-Axis</legend>
+		<legend translate>Y-Axis (Right)</legend>
 		<md-input-container>
 			<label translate>Label</label>
 			<input type="text" ng-model="ctrl.chart.y2.label" ng-change="ctrl.chartChanged()">
