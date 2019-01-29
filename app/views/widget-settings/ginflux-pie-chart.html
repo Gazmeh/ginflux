@@ -1,129 +1,103 @@
-<!-- Size -->
-<section>
-	<md-input-container>
-		<label translate>Height</label>
-		<input 
-			type="number" 
-			ng-model="ctrl.chart.height"
-			ng-change="ctrl.chartChanged()">
-	</md-input-container>
+<section class="setting-page">
+  <!-- Size -->
+  <fieldset>
+    <legend translate>Size</legend>
+    <md-input-container>
+      <label translate>Height</label>
+      <input type="number" ng-model="ctrl.chart.height" ng-change="ctrl.chartChanged()">
+    </md-input-container>
+  </fieldset>
+
+  <!-- Margin -->
+  <fieldset>
+    <legend translate>Margin</legend>
+    <md-input-container>
+      <label translate>Top</label>
+      <input type="number" ng-model="ctrl.chart.margin.top" ng-change="ctrl.chartChanged()">
+    </md-input-container>
+    <md-input-container>
+      <label translate>Right</label>
+      <input type="number" ng-model="ctrl.chart.margin.right" ng-change="ctrl.chartChanged()">
+    </md-input-container>
+    <md-input-container>
+      <label translate>Bottom</label>
+      <input type="number" ng-model="ctrl.chart.margin.bottom" ng-change="ctrl.chartChanged()">
+    </md-input-container>
+    <md-input-container>
+      <label translate>Left</label>
+      <input type="number" ng-model="ctrl.chart.margin.left" ng-change="ctrl.chartChanged()">
+    </md-input-container>
+  </fieldset>
+
+  <!-- Legend -->
+  <fieldset>
+    <legend translate>Legend</legend>
+    <md-input-container>
+      <md-checkbox ng-model="ctrl.chart.legend.enable" ng-change="ctrl.chartChanged()">
+        <span translate>Show Legend</span>
+      </md-checkbox>
+    </md-input-container>
+    <md-input-container>
+      <label translate>Position</label>
+      <input type="text" ng-model="ctrl.chart.legend.position" ng-change="ctrl.chartChanged()">
+    </md-input-container>
+    <md-input-container>
+      <label translate>Top</label>
+      <input type="number" ng-model="ctrl.chart.legend.margin.top" ng-change="ctrl.chartChanged()">
+    </md-input-container>
+    <md-input-container>
+      <label translate>Right</label>
+      <input type="number" ng-model="ctrl.chart.legend.margin.right" ng-change="ctrl.chartChanged()">
+    </md-input-container>
+    <md-input-container>
+      <label translate>Bottom</label>
+      <input type="number" ng-model="ctrl.chart.legend.margin.bottom" ng-change="ctrl.chartChanged()">
+    </md-input-container>
+    <md-input-container>
+      <label translate>Left</label>
+      <input type="number" ng-model="ctrl.chart.legend.margin.left" ng-change="ctrl.chartChanged()">
+    </md-input-container>
+  </fieldset>
+
+  <!-- donut -->
+  <fieldset>
+    <legend translate>Legend</legend>
+    <md-input-container>
+      <md-checkbox ng-model="ctrl.chart.donut.enable" ng-change="ctrl.chartChanged()">
+        <span translate>Donut</span>
+      </md-checkbox>
+    </md-input-container>
+    <md-input-container>
+      <label translate>Donut ratio</label>
+      <input
+        type="number"
+        ng-model="ctrl.chart.donut.ratio"
+        ng-change="ctrl.chartChanged()">
+    </md-input-container>
+  </fieldset>
+
+  <!-- Label -->
+  <fieldset>
+    <legend translate>Legend</legend>
+    <md-switch
+      ng-model="ctrl.chart.label.enable"
+      ng-change="ctrl.chartChanged()">
+      <span translate>Label</span>
+    </md-switch>
+    <md-input-container>
+      <label translate>Label type</label>
+      <input
+        type="text"
+        ng-model="ctrl.chart.label.type"
+        ng-change="ctrl.chartChanged()">
+    </md-input-container>
+    <md-input-container>
+      <label translate>Label duration</label>
+      <input
+        type="Number"
+        ng-model="ctrl.chart.label.duration"
+        ng-change="ctrl.chartChanged()">
+    </md-input-container>
+  </fieldset>
+
 </section>
-
-<!-- Margin -->
-<section>
-	<md-input-container>
-		<label translate>Top</label>
-		<input 
-			type="number" 
-			ng-model="ctrl.chart.margin.top"
-			ng-change="ctrl.chartChanged()">
-	</md-input-container>
-	<md-input-container>
-		<label translate>Right</label>
-		<input 
-			type="number" 
-			ng-model="ctrl.chart.margin.right"
-			ng-change="ctrl.chartChanged()">
-	</md-input-container>
-	<md-input-container>
-		<label translate>Bottom</label>
-		<input 
-			type="number" 
-			ng-model="ctrl.chart.margin.bottom"
-			ng-change="ctrl.chartChanged()">
-	</md-input-container>
-	<md-input-container>
-		<label translate>Left</label>
-		<input 
-			type="number" 
-			ng-model="ctrl.chart.margin.left"
-			ng-change="ctrl.chartChanged()">
-	</md-input-container>
-</section>
-
-
-<!-- Legend -->
-<section>
-	<md-switch 
-		ng-model="ctrl.chart.legend.enable"
-		ng-change="ctrl.chartChanged()">
-		<span translate>Legend</span>
-	</md-switch>
-	<md-input-container>
-		<label translate>Position</label>
-		<input 
-			type="text" 
-			ng-model="ctrl.chart.legend.position"
-			ng-change="ctrl.chartChanged()">
-	</md-input-container>
-	<md-input-container>
-		<label translate>Top</label>
-		<input 
-			type="number" 
-			ng-model="ctrl.chart.legend.margin.top"
-			ng-change="ctrl.chartChanged()">
-	</md-input-container>
-	<md-input-container>
-		<label translate>Right</label>
-		<input 
-			type="number" 
-			ng-model="ctrl.chart.legend.margin.right"
-			ng-change="ctrl.chartChanged()">
-	</md-input-container>
-	<md-input-container>
-		<label translate>Bottom</label>
-		<input 
-			type="number" 
-			ng-model="ctrl.chart.legend.margin.bottom"
-			ng-change="ctrl.chartChanged()">
-	</md-input-container>
-	<md-input-container>
-		<label translate>Left</label>
-		<input 
-			type="number" 
-			ng-model="ctrl.chart.legend.margin.left"
-			ng-change="ctrl.chartChanged()">
-	</md-input-container>
-</section>
-
-
-<!-- donut -->
-<section>
-	<md-switch 
-		ng-model="ctrl.chart.donut.enable"
-		ng-change="ctrl.chartChanged()">
-		<span translate>Donut</span>
-	</md-switch>
-	<md-input-container>
-		<label translate>Donut ratio</label>
-		<input 
-			type="number" 
-			ng-model="ctrl.chart.donut.ratio"
-			ng-change="ctrl.chartChanged()">
-	</md-input-container>
-</section>
-
-<!-- Label -->
-<section>
-	<md-switch 
-		ng-model="ctrl.chart.label.enable"
-		ng-change="ctrl.chartChanged()">
-		<span translate>Label</span>
-	</md-switch>
-	<md-input-container>
-		<label translate>Label type</label>
-		<input 
-			type="text" 
-			ng-model="ctrl.chart.label.type"
-			ng-change="ctrl.chartChanged()">
-	</md-input-container>
-	<md-input-container>
-		<label translate>Label duration</label>
-		<input 
-			type="Number" 
-			ng-model="ctrl.chart.label.duration"
-			ng-change="ctrl.chartChanged()">
-	</md-input-container>
-</section>
-
-
