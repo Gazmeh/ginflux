@@ -1,0 +1,62 @@
+/**
+ * Created by mgh.
+ */
+ section.setting-page{
+   padding-top: 12px;
+ }
+ .setting-page fieldset:not(:last-child){
+  margin-bottom: 14px;
+}
+ .setting-page fieldset{
+   /*TODO: we must use theme related color */
+   border:1px solid #ccc;
+ }
+
+ .setting-page .md-errors-spacer{
+   min-height: 0px;
+ }
+
+ .setting-page md-input-container {
+   margin-bottom: 8px;
+ }
+
+ .setting-page md-input-container md-switch {
+  margin: 0px;
+  min-width: 200px;
+}
+
+.setting-page md-input-container md-checkbox {
+  margin: 0px;
+  min-width: 200px;
+}
+
+.setting-page wb-ui-setting-color{
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+}
+
+.setting-page wb-ui-setting-color input {
+  margin: 0px;
+  max-width: 171px;
+}
+
+.setting-page md-input-container {
+  min-width: 204px;
+}
+
+.setting-control-wide {
+  display: block;
+  width: 100%;
+}
+
+.wb-flex-fill-space{
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+.wb-util-compact{
+  margin: 0px !important;
+  padding: 0px !important;
+}

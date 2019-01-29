@@ -33,10 +33,16 @@ angular.module('ginfluxApp')//
             var key = $event.key || '';
             if(key.startsWith('series')) {
                 ctrl.loadViewData();
+                //ctrl.loadCahrt();
+                ctrl.chartApi.updateWithData(ctrl.data);
             }
             if(key.startsWith('chart')) {
                 ctrl.loadCahrt();
             }
+            if(key.indexOf('x.isAdjusted')!==-1) {
+                ctrl.loadViewData();
+            }
+
         });
     };
 
@@ -84,6 +90,7 @@ angular.module('ginfluxApp')//
                 type : this.getModelProperty('chart.y1.format.type') || 'Number',
                 specifier : this.getModelProperty('chart.y1.format.specifier') || '.2s'
         };
+       
         this.option = {
                 chart : {
                     type : 'multiChart',
@@ -100,6 +107,8 @@ angular.module('ginfluxApp')//
                     legendPosition: this.getModelProperty('chart.legend.position') || 'top',
                     legend : {
                         align : this.getModelProperty('chart.legend.align'),
+                        //TODO: add setting control for max key legend
+                        maxKeyLength:200,
                         margin : {
                             top : this.getModelProperty('chart.legend.margin.top') || 0,
                             right : this.getModelProperty('chart.legend.margin.right') || 0,
@@ -173,7 +182,10 @@ angular.module('ginfluxApp')//
                     color: this.series[i].color,
                     //columns : g.columns,
                     type : this.series[i].type || 'line',
-                    yAxis : this.series[i].yAxis || 1
+                    yAxis : this.series[i].yAxis || 1,
+                    //
+                    //minValue-x,
+                
             };
             this.data.push(serie);
         }
@@ -281,7 +293,7 @@ angular.module('ginfluxApp')//
         var data = columns.indexOf(key.column);
         var newValues = $sheet.copyColumns(values, [index, data]);
         // justify
-        if(key.isAdjustX){
+        if(this.getModelProperty('chart.x.isAdjusted') ){
             $sheet.adjust(newValues, 0);
         }
         if(key.isAdjustY){

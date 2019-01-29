@@ -172,4 +172,7 @@ angular.module('ginfluxApp')
     // call supper class init
     this.init();
     this.reloadVariables();
+
+    //set default to edit mode
+    //$scope.editable=true;
 });

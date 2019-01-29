@@ -1,62 +1,54 @@
-<div
-	class="md-whiteframe-2dp"
-	layout-padding
-	layout-margin
-	layout="column"
-	ng-repeat="series in ctrl.series track by $index">
-	<md-input-container>
-		<label translate>Title</label>
-		<input
-			type="text"
-			aria-label="Query title"
-			ng-model="series.title"
-			ng-model-options="{updateOn : 'change'}"
-			ng-change="ctrl.seriesChanged()">
+<section class="setting-page">
+
+	<fieldset ng-repeat="series in ctrl.series track by $index">
+		<legend>Series #{{$index+1}}</legend>
+
+		<md-input-container>
+			<label translate>Title</label>
+			<input type="text" aria-label="Query title" ng-model="series.title" ng-model-options="{updateOn : 'change'}"
+			 ng-change="ctrl.seriesChanged()">
+			</textarea>
+		</md-input-container>
+
+		<!-- <md-input-container>
+			<label translate>Description</label>
+			<textarea type="text" aria-label="Query description" rows="2" ng-model="series.description" ng-model-options="{updateOn : 'change'}"
+			 ng-change="ctrl.seriesChanged()">
 		</textarea>
-	</md-input-container>
-	<md-input-container>
-		<label translate>Description</label>
-		<textarea
-			type="text"
-			aria-label="Query description"
-			rows="2"
-			ng-model="series.description"
-			ng-model-options="{updateOn : 'change'}"
-			ng-change="ctrl.seriesChanged()">
-		</textarea>
-	</md-input-container>
-	
-	<md-input-container>
-		<label translate>Type</label>
-		<input
-			type="text"
-			ng-model="series.type"
-			ng-change="ctrl.seriesChanged()">
-	</md-input-container>
-	
-	<md-input-container>
-		<label translate>Axis</label>
-		<input
-			type="text"
-			ng-model="series.yAxis"
-			ng-change="ctrl.seriesChanged()">
-	</md-input-container>
-	
-	<wb-ui-setting-color
-		title="Color"
-		wb-ui-setting-clear-button="true"
-		wb-ui-setting-preview="true"
-		ng-model="series.color"
-		ng-change="ctrl.seriesChanged()">
-	</wb-ui-setting-color>
-	<md-switch 
-		ng-model="series.isAdjustX"
-	    ng-change="ctrl.seriesChanged()">
-	    <span translate>Adjust X</span>
-	</md-switch>
-	<md-switch 
-		ng-model="series.isAdjustY"
-	    ng-change="ctrl.seriesChanged()">
-	    <span translate>Adjust Y</span>
-	</md-switch>
-</div>
+		</md-input-container> -->
+
+		<md-input-container>
+			<label translate>Type</label>
+			<md-select ng-model="series.type" ng-change="ctrl.seriesChanged()">
+				<md-option value="line">Line</md-option>
+				<md-option value="bar">Bar</md-option>
+				<md-option value="area">Area</md-option>
+			</md-select>
+		</md-input-container>
+
+		<wb-ui-setting-color title="Color" wb-ui-setting-clear-button="true" wb-ui-setting-preview="true" ng-model="series.color"
+		 ng-change="ctrl.seriesChanged()">
+		</wb-ui-setting-color>
+
+		<md-input-container>
+			<label translate>Axis</label>
+			<md-select ng-model="series.yAxis" ng-change="ctrl.seriesChanged()">
+				<md-option value="1" translate>Left</md-option>
+				<md-option value="2" translate>Right</md-option>
+			</md-select>
+		</md-input-container>
+
+		<!-- <md-input-container>
+			<md-checkbox ng-model="series.isAdjustX" ng-change="ctrl.seriesChanged()">
+				<span translate>Adjusted X-Axis</span>
+			</md-checkbox>
+		</md-input-container>
+
+		<md-input-container>
+			<md-checkbox ng-model="series.isAdjustY" ng-change="ctrl.seriesChanged()">
+				<span translate>Adjusted Y-Axis</span>
+			</md-checkbox>
+		</md-input-container> -->
+
+	</fieldset>
+</section>

@@ -55,27 +55,30 @@ angular.module('ginfluxApp')
                     specifier: 'HH:mm:ss'
                 },
                 label: 'Test time',
-                rotateLabels: 0
+                rotateLabels: 0,
+                isAdjusted:true
             },
             y: {
-                label: 'Mesurement', 
+                label: 'Measurement', 
                 format: {
                     type: 'Number', 
                     specifier: '0.2s'
                 }, 
                 rotateLabels: '0', 
                 min: '0', 
-                max: '0'
+                max: '0',
+                showMaxMin:false
             },
             y2: {
-                label: 'Mesurement', 
+                label: 'Measurement', 
                 format: {
                     type: 'Number', 
                     specifier: '0.2s'
                 }, 
                 rotateLabels: '0', 
                 min: '0', 
-                max: '0'
+                max: '0',
+                showMaxMin:false
             }
     };
 
@@ -112,7 +115,7 @@ angular.module('ginfluxApp')
             queries: [{
                 title: 'Last 10 samples',
                 description: 'Default query',
-                sql: 'SELECT * FROM {db}..{mesurement} LIMIT 10',
+                sql: 'SELECT * FROM {db}..{measurement} LIMIT 10',
                 url: '{&host}',
                 index: 'time',
                 useAsContext: false,
@@ -146,14 +149,14 @@ angular.module('ginfluxApp')
             queries: [{
                 title: 'Mean of response time',
                 description: 'Default query',
-                sql: 'SELECT mean(response_time) FROM {db}..{mesurement} WHERE time > {start}ms AND time < {end}ms GROUP BY time(10s)',
+                sql: 'SELECT mean(response_time) FROM {db}..{measurement} WHERE time > {start}ms AND time < {end}ms GROUP BY time(10s)',
                 url: '{&host}',
                 useAsContext: false,
                 visible: true
             }, {
                 title: 'Test time',
                 description: 'Select start and end time stamp of the samples',
-                sql: 'SELECT FIRST(time_stamp) AS "start", LAST(time_stamp) AS "end" FROM {db}..{mesurement}',
+                sql: 'SELECT FIRST(time_stamp) AS "start", LAST(time_stamp) AS "end" FROM {db}..{measurement}',
                 url: '{&host}',
                 useAsContext: true,
                 visible: false
@@ -184,21 +187,14 @@ angular.module('ginfluxApp')
         groups: ['ginflux'],
         setting: ['ginflux-queries', 'ginflux-series', 'ginflux-piechart'],
         model: {
-            url: 'http://195.146.59.40:8086/query',
+            url: '{&host}',
             queries: [{
                 title: 'Mean of response time',
                 description: 'Default query',
-                sql: 'SELECT sum(success) as count FROM {db}..{mesurement} WHERE time > {start}ms AND time < {end}ms GROUP BY time(10s), tag_name',
+                sql: 'SELECT min(response_time) FROM {db}..{measurement} GROUP BY tag_name SLIMIT 10',
                 url: '{&host}',
                 useAsContext: false,
                 visible: true
-            }, {
-                title: 'Test time',
-                description: 'Select start time stamp of the samples',
-                sql: 'SELECT FIRST(time_stamp) AS "start", LAST(time_stamp) AS "end" FROM {db}..{mesurement}',
-                url: '{&host}',
-                useAsContext: true,
-                visible: false
             }],
             chart: defaultChart
         },
@@ -231,17 +227,10 @@ angular.module('ginfluxApp')
             queries: [{
                 title: 'Mean of response time',
                 description: 'Default query',
-                sql: 'SELECT min(response_time) as q0, mean(response_time) as q1, mean(reponse_time) as q2, mean(response_time) as q3, max(response_time) as q4 FROM {db}..{mesurement} WHERE time > {start}ms AND time < {end}ms GROUP BY time(10s)',
+                sql: 'SELECT min(response_time) as q0, percentile(response_time,25) as q1, mean(response_time) as q2, percentile(response_time,75) as q3, max(response_time) as q4 FROM {db}..{measurement} GROUP BY tag_name SLIMIT 10',
                 url: '{&host}',
                 useAsContext: false,
                 visible: true
-            }, {
-                title: 'Test time',
-                description: 'Select start time stamp of the samples',
-                sql: 'SELECT FIRST(time_stamp) AS "start", LAST(time_stamp) AS "end" FROM {db}..{mesurement}',
-                url: '{&host}',
-                useAsContext: true,
-                visible: false
             }],
             chart: defaultChart
         },
@@ -285,6 +274,19 @@ angular.module('ginfluxApp')
 
             this.queryChanged = function(){
                 this.setProperty('queries', this.queries);
+            };
+
+            //add a new blank query and dose not notify query_changed events.
+            this.addNewQuery = function(){
+                var newQuery={
+                    title:'New Query',
+                    description:'',
+                    url:'{&host}',
+                    useAsContext:false,
+                    visible:true,
+                    sql:''
+                };
+                this.queries.push(newQuery);
             };
 
             this.addQuery = function(query){
@@ -362,6 +364,10 @@ angular.module('ginfluxApp')
 
             this.chartChanged = function(){
                 this.setProperty('chart', this.chart);
+            };
+
+            this.chartXAdjustedChanged = function(){
+                this.setProperty('chart.x.isAdjusted', this.chart.x.isAdjusted);
             };
         }
     });

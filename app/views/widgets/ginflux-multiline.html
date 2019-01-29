@@ -6,6 +6,8 @@
 	
 	<nvd3 
 		ng-if="ctrl.state === 'loaded'"
+		api="ctrl.chartApi"
+		config="{deepWatchData:false}"
 		options="ctrl.option"
 		data="ctrl.data">
 	</nvd3>
