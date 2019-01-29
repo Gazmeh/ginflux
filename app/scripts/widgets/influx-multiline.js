@@ -33,8 +33,9 @@ angular.module('ginfluxApp')//
             var key = $event.key || '';
             if(key.startsWith('series')) {
                 ctrl.loadViewData();
-                //ctrl.loadCahrt();
-                ctrl.chartApi.updateWithData(ctrl.data);
+                if(angular.isFunction(ctrl.chartApi)){
+                    ctrl.chartApi.updateWithData(ctrl.data);
+                }
             }
             if(key.startsWith('chart')) {
                 ctrl.loadCahrt();
@@ -251,8 +252,15 @@ angular.module('ginfluxApp')//
         var keys = [];
         var resultsCount = this.queryCacheResultsSize(query);
         var index = this.getQueryIndex(query);
+        // delete old error
+        delete query.error; 
         for(var resultIndex = 0; resultIndex < resultsCount; resultIndex++){ 
             var result = this.getCacheResult(query, resultIndex);
+            // check if there is error in query result then set in the query
+            if(result.error) {
+                query.error = result.error;
+                return [];
+            }
             var seriesCount = result.series.length;
             for(var seriesIndex = 0; seriesIndex < seriesCount; seriesIndex++){
                 var dataSeries = this.getCacheSeries(query, resultIndex, seriesIndex);

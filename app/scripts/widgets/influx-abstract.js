@@ -90,7 +90,7 @@ angular.module('ginfluxApp')//
 
         this.on('modelUpdated', function($event){
             // If query is changed from this widget
-            if(this._influx_lock){
+            if(ctrl._influx_lock){
                 return;
             }
             var key = $event.key || '';
@@ -128,9 +128,7 @@ angular.module('ginfluxApp')//
                 },
                 loaded: {
                     onModelChange: function () {
-//                        if (ctrl.isQueryChanged() || !ctrl.isCached()) {
-                            this.transition('loading');
-//                        }
+                        this.transition('loading');
                     },
                 }
             },
@@ -222,12 +220,16 @@ angular.module('ginfluxApp')//
             throw $error;
         })//
         .then(function(){
-            ctrl._influx_lock = true;
-            ctrl.setModelProperty('queries', ctrl.queries);
-            ctrl._influx_lock = false;
             ctrl.stateMachin.success();
         }, function($error){
             ctrl.stateMachin.fail($error);
+        })
+        .finally(function(){
+            try{
+                ctrl._influx_lock = true;
+                ctrl.setModelProperty('queries', ctrl.queries);
+                ctrl._influx_lock = false;
+            }catch (ex){}
         });
     };
 
@@ -313,7 +315,7 @@ angular.module('ginfluxApp')//
         }
         // run the query
         Mustache.parse(query.sql, ['{', '}']);
-        
+
         // load refresh context
         var context = this.getQueryContext();
         var sql = Mustache.render(query.sql, context);
@@ -404,11 +406,11 @@ angular.module('ginfluxApp')//
 
         Mustache.parse(url, ['{', '}']);
         url = Mustache.render(url, context);
-        
+
         $sce.trustAsUrl(url);
         return url;
     };
-    
+
     /*
      * Gets widget index name
      */
@@ -421,7 +423,7 @@ angular.module('ginfluxApp')//
         }
         return index;
     };
-    
+
     this.getQueryByFingerprint = function(fingerPrint) {
         for(var i = 0; i < this.queries.length; i++){
             if(this.queries[i].fingerPrint === fingerPrint){
@@ -430,8 +432,8 @@ angular.module('ginfluxApp')//
         }
         return null;
     };
-    
-    
+
+
     this.getCacheResult = function(query, resultIndex){
         if(!resultIndex) {
             resultIndex = 0;
@@ -462,7 +464,7 @@ angular.module('ginfluxApp')//
     this.getCacheSeriesColumns = function(query, resultIndex, sereisIndex){
         return this.getCacheSeries(query, resultIndex, sereisIndex).columns;
     };
-    
+
     this.getCacheSeriesValues = function(query, resultIndex, seriesIndex){
         return this.getCacheSeries(query, resultIndex, seriesIndex).values;
     };
@@ -479,20 +481,20 @@ angular.module('ginfluxApp')//
         }
         return seriesIndex < query.cache.results[resultIndex].series.length;
     };
-    
+
     this.queryContainsColumn = function(query, column, resultIndex) {
         var queryColumns = this.getCacheColumns(query, resultIndex) || [];
         return queryColumns.indexOf(column) >= 0;
     };
-    
+
     this.queryCacheResultsSize = function(query) {
         if(!query.cache){
             return 0;
         }
         return query.cache.results.length;
     };
-    
-    
+
+
     this.refreshInflux = function(){
         var queries = this.queries;
         for(var i = 0; i < queries.length; i++){
