@@ -3,9 +3,7 @@
 /*
  * Main module
  */
-angular.module('ginfluxApp', [ 'ngMaterialDashboard', //
-'am-wb-chart', //
-'nvd3' ])
+angular.module('ginfluxApp', [ 'ngMaterialDashboard', 'nvd3' ])
 // Load application
 .run(function ($app) {
     $app.start('ginflux');
