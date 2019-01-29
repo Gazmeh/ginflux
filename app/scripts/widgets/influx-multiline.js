@@ -209,20 +209,17 @@ angular.module('ginfluxApp')//
         if(!this.series){
             return;
         }
-        var condidates = [];
+        var newList = [];
         for(var i = 0; i < this.series.length; i++){
-            if(this.series[i].markDeleted) {
-                condidates.push(i);
+            if(!this.series[i].markDeleted) {
+                newList.push(this.series[i]);
             }
         }
-        var ctrl = this;
-        angular.forEach(condidates, function(i) {
-            ctrl.series.splice(i, 1);
-        });
+        this.series = newList;
     };
 
     this.getSeriesByKey = function(key) {
-        var series = this.getModelProperty('series') || [];
+        var series = this.series || [];
         for(var i = 0; i < series.length; i++){
             if(this.isSeriesKey(series[i], key)) {
                 return series[i];

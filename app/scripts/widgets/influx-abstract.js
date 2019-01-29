@@ -220,16 +220,12 @@ angular.module('ginfluxApp')//
             throw $error;
         })//
         .then(function(){
+            ctrl._influx_lock = true;
+            ctrl.setModelProperty('queries', ctrl.queries);
+            ctrl._influx_lock = false;
             ctrl.stateMachin.success();
         }, function($error){
             ctrl.stateMachin.fail($error);
-        })
-        .finally(function(){
-            try{
-                ctrl._influx_lock = true;
-                ctrl.setModelProperty('queries', ctrl.queries);
-                ctrl._influx_lock = false;
-            }catch (ex){}
         });
     };
 
