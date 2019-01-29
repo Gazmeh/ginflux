@@ -79,7 +79,6 @@ module.exports = function(config) {
       'bower_components/angular-nvd3/dist/angular-nvd3.js',
       'bower_components/am-wb-seen-monitors/dist/am-wb-seen-monitors.js',
       'bower_components/angular-material-dashboard/dist/angular-material-dashboard.js',
-      'bower_components/am-wb-chart/dist/am-wb-chart.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/**/*.js',
