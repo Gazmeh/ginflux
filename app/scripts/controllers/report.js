@@ -27,7 +27,7 @@ angular.module('ginfluxApp')
  * @name GMeterReportStressConfigCtrl
  * 
  */
-.controller('GInfluxReportCtrl', function($scope, $controller, $ghReport, $routeParams, $wbUtil, $actions, $navigator, $rootScope) {
+.controller('GInfluxReportCtrl', function($scope, $controller, $ghReport, $routeParams, $wbUtil, $actions, $navigator) {
 
     // init controller
     angular.extend(this, $controller('AmdAbstractDashboardCtrl', {
