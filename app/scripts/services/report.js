@@ -82,8 +82,16 @@ angular.module('ginfluxApp')
      * Gets list of variable set
      */
     this.getVariableSets = function(){
-        if(!angular.isArray($rootScope.app.setting.ginfluxVirableSet)){
-            $rootScope.app.setting.ginfluxVirableSet = [];
+        if(!angular.isArray($rootScope.app.setting.ginfluxVirableSet) ||
+                $rootScope.app.setting.ginfluxVirableSet.length === 0){
+            $rootScope.app.setting.ginfluxVirableSet = [{
+                title: 'Variables',
+                items: [
+                    {active: true, key: 'host', value: 'http://195.146.59.40:8086/query'},
+                    {active: true, key: 'db', value: 'test_run_2406'},
+                    {active: true, key: 'measurement', value: 'samples'},
+                ]
+            }];
         }
         return $rootScope.app.setting.ginfluxVirableSet;
     };

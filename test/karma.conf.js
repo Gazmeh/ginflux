@@ -73,11 +73,6 @@ module.exports = function(config) {
       'bower_components/angular-material-persian-datepicker/dist/datePicker.min.js',
       'bower_components/machina/lib/machina.js',
       'bower_components/mblowfish-core/dist/mblowfish-core.js',
-      'bower_components/seen-monitor/dist/seen-monitor.js',
-      'bower_components/d3/d3.js',
-      'bower_components/nvd3/build/nv.d3.js',
-      'bower_components/angular-nvd3/dist/angular-nvd3.js',
-      'bower_components/am-wb-seen-monitors/dist/am-wb-seen-monitors.js',
       'bower_components/angular-material-dashboard/dist/angular-material-dashboard.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
