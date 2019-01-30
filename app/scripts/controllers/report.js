@@ -148,31 +148,10 @@ angular.module('ginfluxApp')
         scope: $scope
     });
     
-    $actions.newAction({
-        id: 'ginflux.local.db.setting',
-        priority: 13,
-        icon: 'storage',
-        title: 'Global InfluxDB settings',
-        description: 'Manage global (local) settings of InfluxDB',
-        action: function(){
-            $navigator.openDialog({
-                templateUrl: 'views/dialogs/ginflux-local-setting.html',
-                parent : angular.element(document.body),
-                clickOutsideToClose : true,
-                fullscreen: true,
-                multiple:true,
-                scope: $rootScope
-            });
-        },
-        groups: ['mb.toolbar.menu'],
-        scope: $scope
-    });
-    
-    
     // call supper class init
     this.init();
     this.reloadVariables();
 
     //set default to edit mode
-    //$scope.editable=true;
+    this.toolbarMenu = $actions.group('mb.toolbar.menu');
 });

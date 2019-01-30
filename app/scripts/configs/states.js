@@ -44,6 +44,7 @@ angular.module('ginfluxApp')
         templateUrl: 'views/ginflux-report.html',
         protect : false,
         sidenavs : [],
+        toolbars : [],
         integerate : function () {
         }
     }) //

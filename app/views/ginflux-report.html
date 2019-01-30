@@ -2,50 +2,141 @@
 	layout="column"
 	flex>
 	<!-- Extra toolbar: contains more actions -->
-	<md-toolbar
-		id="report-extra-action"
-		class="md-hue-2">
-		<div 
-			class="md-toolbar-tools"
-			layout="row">
-			<span flex></span>
-			<md-divider></md-divider>
-			<md-input-container>
-				<md-select 
-					ng-model="ctrl.currentVariableSet" 
-					ng-change="ctrl.setCurrentVariableSet(ctrl.currentVariableSet)"
-					md-selected-text="{{item.title}}">
-					<md-option 
-						ng-repeat="item in ctrl.variableSets track by $index" 
-						ng-value="item">{{item.title}}</md-option>
-				</md-select>
-			</md-input-container>
-			<md-button 
-				ng-click="ctrl.viewVariableSets()"
-				class="md-icon-button" 
-				aria-label="Display current variable set">
-				<wb-icon>visibility</wb-icon>
-			</md-button>
-			<md-button 
-				ng-click="ctrl.managesVariableSets()"
-				class="md-icon-button" 
-				aria-label="Manage variable sets">
-				<wb-icon>settings</wb-icon>
-			</md-button>
-			<md-button 
-				ng-click="ctrl.addVariableSet()"
-				class="md-icon-button" 
-				aria-label="Add a variable sets">
-				<wb-icon>add</wb-icon>
-			</md-button>
-			<md-button 
-				ng-click="ctrl.deleteVariableSet()"
-				class="md-icon-button" 
-				aria-label="Delete the current variable sets">
-				<wb-icon>delete</wb-icon>
-			</md-button>
+	<md-toolbar class="md-menu-toolbar">
+		<div layout="row">
+			<md-toolbar-filler layout layout-align="center center">
+				<img 
+					ng-src="/api/v2/cms/dsfds" 
+					ng-src-error="https://www.gravatar.com/avatar/{{report.id | wbmd5}}?d=robohash&size=128"
+					alt="Washed Out"
+					width="64">
+			</md-toolbar-filler>
+			<div style="width: 100%;">
+				<div layout="row" style="width: 100%;">
+					<div flex>
+						<h4 style="margin: 2px 0px;">{{ctrl.report.title}}</h4>
+					</div>
+					<div layout="row">
+						<md-button
+							ng-repeat="menu in ctrl.toolbarMenu.items | orderBy:['-priority']"
+							ng-show="menu.visible()"
+							ng-href="{{menu.url}}"
+							ng-click="menu.exec($event);"
+							class="md-icon-button">
+							<md-tooltip ng-if="menu.tooltip || menu.description" md-delay="1500">{{menu.description | translate}}</md-tooltip>
+							<wb-icon ng-if="menu.icon">{{menu.icon}}</wb-icon>
+						</md-button>
+						<md-select 
+							style="margin: 0px;"
+							ng-model="ctrl.currentVariableSet" 
+							ng-change="ctrl.setCurrentVariableSet(ctrl.currentVariableSet)"
+							md-selected-text="{{item.title}}">
+							<md-option 
+								ng-repeat="item in ctrl.variableSets track by $index" 
+								ng-value="item">{{item.title}}</md-option>
+						</md-select>
+					</div>
+				</div>
+				<md-menu-bar>
+					<md-menu>
+						<button ng-click="$mdMenu.open()">
+							<span translate>File</span>
+						</button>
+						<md-menu-content>
+							<md-menu-item>
+								<md-button>
+									<span translate>Share</span>
+								</md-button>
+							</md-menu-item>
+						</md-menu-content>
+					</md-menu>
+					<md-menu>
+						<button ng-click="$mdMenu.open()">
+							<span translate>Variables</span>
+						</button>
+						<md-menu-content>
+							<md-menu-item>
+								<wb-icon>visibility</wb-icon>
+								<md-button 
+									ng-click="ctrl.viewVariableSets()"
+									aria-label="Display current variable set">
+									<span translate>Show details of the current set</span>
+								</md-button>
+							</md-menu-item>
+							<md-menu-item>
+								<wb-icon>settings</wb-icon>
+								<md-button 
+									ng-click="ctrl.managesVariableSets()"
+									aria-label="Manage variable sets">
+									<span translate>Manage current variable set</span>
+								</md-button>
+							</md-menu-item>
+							<md-menu-item>
+								<wb-icon>add</wb-icon>
+								<md-button 
+									ng-click="ctrl.addVariableSet()"
+									aria-label="Add a variable sets">
+									<span translate>Add new variable set</span>
+								</md-button>
+							</md-menu-item>
+							<md-menu-item>
+								<wb-icon>delete</wb-icon>
+								<md-button 
+									ng-click="ctrl.deleteVariableSet()"
+									aria-label="Delete the current variable sets">
+									<span translate>Delete current variables</span>
+								</md-button>
+							</md-menu-item>
+						</md-menu-content>
+					</md-menu>
+				</md-menu-bar>
+			</div>
 		</div>
 	</md-toolbar>
+<!-- 	<md-toolbar -->
+<!-- 		id="report-extra-action" -->
+<!-- 		class="md-hue-2"> -->
+<!-- 		<div  -->
+<!-- 			class="md-toolbar-tools" -->
+<!-- 			layout="row"> -->
+<!-- 			<span flex></span> -->
+<!-- 			<md-divider></md-divider> -->
+<!-- 			<md-input-container> -->
+<!-- 				<md-select  -->
+<!-- 					ng-model="ctrl.currentVariableSet"  -->
+<!-- 					ng-change="ctrl.setCurrentVariableSet(ctrl.currentVariableSet)" -->
+<!-- 					md-selected-text="{{item.title}}"> -->
+<!-- 					<md-option  -->
+<!-- 						ng-repeat="item in ctrl.variableSets track by $index"  -->
+<!-- 						ng-value="item">{{item.title}}</md-option> -->
+<!-- 				</md-select> -->
+<!-- 			</md-input-container> -->
+<!-- 			<md-button  -->
+<!-- 				ng-click="ctrl.viewVariableSets()" -->
+<!-- 				class="md-icon-button"  -->
+<!-- 				aria-label="Display current variable set"> -->
+<!-- 				<wb-icon>visibility</wb-icon> -->
+<!-- 			</md-button> -->
+<!-- 			<md-button  -->
+<!-- 				ng-click="ctrl.managesVariableSets()" -->
+<!-- 				class="md-icon-button"  -->
+<!-- 				aria-label="Manage variable sets"> -->
+<!-- 				<wb-icon>settings</wb-icon> -->
+<!-- 			</md-button> -->
+<!-- 			<md-button  -->
+<!-- 				ng-click="ctrl.addVariableSet()" -->
+<!-- 				class="md-icon-button"  -->
+<!-- 				aria-label="Add a variable sets"> -->
+<!-- 				<wb-icon>add</wb-icon> -->
+<!-- 			</md-button> -->
+<!-- 			<md-button  -->
+<!-- 				ng-click="ctrl.deleteVariableSet()" -->
+<!-- 				class="md-icon-button"  -->
+<!-- 				aria-label="Delete the current variable sets"> -->
+<!-- 				<wb-icon>delete</wb-icon> -->
+<!-- 			</md-button> -->
+<!-- 		</div> -->
+<!-- 	</md-toolbar> -->
 
 	<div 
 		layout="row" 
