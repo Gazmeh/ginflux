@@ -250,7 +250,7 @@ angular.module('ginfluxApp')//
         // tags to string
         var label = '__';
         for(key in tags) {
-            label = label + ',' + key + ':' + tags[key];
+            label = label + key + ':' + tags[key] + ',';
         }
         return label;
     };

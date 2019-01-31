@@ -1,0 +1,20 @@
+<section 
+	class="setting-page">
+	<fieldset>
+		<legend>Columns</legend>
+		<md-input-container>
+			<md-checkbox 
+				ng-model="ctrl.removeTime" 
+				ng-change="ctrl.removeTimeChanged()">
+				<span translate>Remove time column</span>
+			</md-checkbox>
+		</md-input-container>
+		<md-input-container>
+			<md-checkbox 
+				ng-model="ctrl.isTranspose" 
+				ng-change="ctrl.isTransposeChanged()">
+				<span translate>Transpose</span>
+			</md-checkbox>
+		</md-input-container>
+	</fieldset>
+</section>

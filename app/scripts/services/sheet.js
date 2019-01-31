@@ -47,7 +47,21 @@ angular.module('ginfluxApp')
         }
         return result;
     };
+    
+    this.transposeValues = function(values){
+        values = _.cloneDeep(values);
+        return values[0].map((col, i) => values.map(row => row[i]));
+    };
 
+    
+    this.removeColumn = function(values, index) {
+        values = _.cloneDeep(values);
+        for(var i = 0; i < values.length; i++){
+            values[i].splice(index, 1);
+        }
+        return values;
+    };
+    
 	/**
 	 * Format data as local date
 	 * 

@@ -4,8 +4,10 @@
 </div>
 <table
 	class="mb-table gh-table"
-	ng-show="ctrl.state === 'loaded'">
-	<thead>
+	ng-show="ctrl.state === 'loaded'"
+	ng-if="!ctrl.multiSeries">
+	<thead
+		ng-if="!ctrl.isTranspose">
 		<tr
  			md-colors="{color: 'primary-700'}">
 			<td 
@@ -17,6 +19,35 @@
 	<tbody>
 		<tr
 			ng-repeat="row in ctrl.body track by $index">
+			<td 
+				ng-repeat="value in row track by $index" 
+				translate>
+				{{value}}
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table
+	class="mb-table gh-table"
+	ng-show="ctrl.state === 'loaded'"
+	ng-if="ctrl.multiSeries">
+	<thead
+		ng-if="!ctrl.isTranspose">
+		<tr
+ 			md-colors="{color: 'primary-700'}">
+			<td 
+				ng-repeat="header in ctrl.headers track by $index">
+				<span translate>{{header}}</span>
+			</td>
+		</tr>
+	</thead>
+	<tbody
+		ng-repeat="series in ctrl.body track by $index">
+		<tr
+			ng-repeat="row in series.values track by $index">
+			<td 
+				ng-if="$index == 0"
+				rowspan="{{series.values.length}}">{{series.label}}</td>
 			<td 
 				ng-repeat="value in row track by $index" 
 				translate>

@@ -110,7 +110,7 @@ angular.module('ginfluxApp')
         description: 'Display a query result in table view.',
         icon: 'wb-widget-group',
         groups: ['ginflux'],
-        setting: ['ginflux-queries'],
+        setting: ['ginflux-queries', 'ginflux-table'],
         model: {
             queries: [{
                 title: 'Last 10 samples',
@@ -430,6 +430,25 @@ angular.module('ginfluxApp')
 
             this.chartChanged = function(){
                 this.setProperty('chart', this.chart);
+            };
+        }
+    });
+    $settings.newPage({
+        type: 'ginflux-table',
+        label: 'Table',
+        icon: 'table',
+        templateUrl: 'views/widget-settings/ginflux-table.html',
+        controllerAs: 'ctrl',
+        controller: function() {
+            this.init = function(newWidget, oldWidget){
+                this.removeTime = this.getProperty('removeTime') || {};
+                this.isTranspose = this.getProperty('isTranspose') || {};
+            };
+            this.removeTimeChanged = function(){
+                this.setProperty('removeTime', this.removeTime);
+            };
+            this.isTransposeChanged = function(){
+                this.setProperty('isTranspose', this.isTranspose);
             };
         }
     });
