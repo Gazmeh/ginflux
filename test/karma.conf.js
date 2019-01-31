@@ -74,6 +74,9 @@ module.exports = function(config) {
       'bower_components/machina/lib/machina.js',
       'bower_components/mblowfish-core/dist/mblowfish-core.js',
       'bower_components/angular-material-dashboard/dist/angular-material-dashboard.js',
+      'bower_components/d3/d3.js',
+      'bower_components/nvd3/build/nv.d3.js',
+      'bower_components/angular-nvd3/dist/angular-nvd3.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/**/*.js',

@@ -23,6 +23,7 @@ angular.module('ginfluxApp')//
      */
     this.initChart = function () {
         var ctrl = this;
+        this.colorPalete = ['#E8743B', '#19A979', '#ED4A7B', '#945ECF', '#13A4B4', '#525DF4', '#BF399E', '#6C8893', '#EE6868', '#2F6497', '#dc0d0e'];
         this.on('state', function ($event) {
             if ($event.newState === 'loaded') {
                 ctrl.loadNewData();
@@ -65,6 +66,7 @@ angular.module('ginfluxApp')//
                     this.unmarkAllSeriesDeleted(series);
                 } else {
                     series = this.createNewSeries(keys[j]);
+                    series.color = this.colorPalete[j%this.colorPalete.length];
                     this.series.push(series);
                 }
             }
@@ -232,10 +234,25 @@ angular.module('ginfluxApp')//
         var query = this.getQueryByFingerprint(key.fingerPrint);
         return _.merge({
             // UI
-            title : query.title,
+            title : query.title + '__' + key.column +  this.tagsToLable(key),
             description : query.description,
             color: '#000000' // TODO: maso, 2018: put random
         }, key);
+    };
+    
+    this.tagsToLable = function(key) {
+        var query = this.getQueryByFingerprint(key.fingerPrint);
+        var series = this.getCacheSeries(query, key.resultIndex, key.seriesIndex);
+        var tags = series.tags;
+        if(!tags){
+            return '';
+        }
+        // tags to string
+        var label = '__';
+        for(key in tags) {
+            label = label + ',' + key + ':' + tags[key];
+        }
+        return label;
     };
 
     this.unmarkAllSeriesDeleted = function(series) {
