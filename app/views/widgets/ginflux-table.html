@@ -46,7 +46,7 @@
 		<tr
 			ng-repeat="row in series.values track by $index">
 			<td 
-				ng-if="$index == 0"
+				ng-if="$index == 0 && !ctrl.removeSeries"
 				rowspan="{{series.values.length}}">{{series.label}}</td>
 			<td 
 				ng-repeat="value in row track by $index" 

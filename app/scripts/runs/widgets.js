@@ -441,14 +441,18 @@ angular.module('ginfluxApp')
         controllerAs: 'ctrl',
         controller: function() {
             this.init = function(newWidget, oldWidget){
-                this.removeTime = this.getProperty('removeTime') || {};
-                this.isTranspose = this.getProperty('isTranspose') || {};
+                this.removeTime = this.getProperty('removeTime');
+                this.isTranspose = this.getProperty('isTranspose');
+                this.removeSeries = this.getProperty('removeSeries');
             };
             this.removeTimeChanged = function(){
                 this.setProperty('removeTime', this.removeTime);
             };
             this.isTransposeChanged = function(){
                 this.setProperty('isTranspose', this.isTranspose);
+            };
+            this.removeSeriesChanged = function(){
+                this.setProperty('removeSeries', this.removeSeries);
             };
         }
     });

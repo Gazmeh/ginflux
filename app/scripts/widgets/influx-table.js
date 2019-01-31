@@ -41,7 +41,8 @@ angular.module('ginfluxApp')//
         this.on('modelUpdated', function($event){
             var key = $event.key;
             if(angular.equals(key, 'isTranspose') ||
-                    angular.equals(key, 'removeTime')){
+                    angular.equals(key, 'removeTime') ||
+                    angular.equals(key, 'removeSeries')){
                 ctrl.loadNewData();
             }
         });
@@ -63,12 +64,15 @@ angular.module('ginfluxApp')//
         var series = result.series;
 
         this.multiSeries = series.length > 1;
+        
+        this.removeSeries = this.getModelProperty('removeSeries');
 
         this.headers = this.getCacheColumns(query, 0) || [];
-        if(this.multiSeries) {
-            this.headers = _.cloneDeep(this.headers);
+        this.headers = _.cloneDeep(this.headers);
+        if(this.multiSeries && !this.removeSeries) {
             this.headers.unshift('series');
         }
+
 
         if(this.multiSeries) {
             this.body = _.cloneDeep(series);

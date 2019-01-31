@@ -11,6 +11,13 @@
 		</md-input-container>
 		<md-input-container>
 			<md-checkbox 
+				ng-model="ctrl.removeSeries" 
+				ng-change="ctrl.removeSeriesChanged()">
+				<span translate>Remove series column</span>
+			</md-checkbox>
+		</md-input-container>
+		<md-input-container>
+			<md-checkbox 
 				ng-model="ctrl.isTranspose" 
 				ng-change="ctrl.isTransposeChanged()">
 				<span translate>Transpose</span>
