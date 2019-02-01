@@ -440,7 +440,7 @@ angular.module('ginfluxApp')
         templateUrl: 'views/widget-settings/ginflux-table.html',
         controllerAs: 'ctrl',
         controller: function() {
-            this.init = function(newWidget, oldWidget){
+            this.init = function(){
                 this.removeTime = this.getProperty('removeTime');
                 this.isTranspose = this.getProperty('isTranspose');
                 this.removeSeries = this.getProperty('removeSeries');

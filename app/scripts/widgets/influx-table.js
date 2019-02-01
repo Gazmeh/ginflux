@@ -120,7 +120,7 @@ angular.module('ginfluxApp')//
     this.removeTimeColumn = function(){
         // remove from header
         var index = this.headers.indexOf('time');
-        if(index == -1){
+        if(index === -1){
             return;
         }
         this.headers = _.cloneDeep(this.headers);
@@ -132,6 +132,6 @@ angular.module('ginfluxApp')//
         } else {
             this.body = $sheet.removeColumn(this.body, index);
         }
-    }
+    };
 
 });

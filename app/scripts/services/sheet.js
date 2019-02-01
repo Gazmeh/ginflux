@@ -34,7 +34,7 @@ angular.module('ginfluxApp')
  * 
  */
 .service('$sheet', function() {
-    
+
     this.copyColumns = function(values, indexes){
         // TOOD; maso, 2019: check for optimization
         var result = [];
@@ -47,13 +47,17 @@ angular.module('ginfluxApp')
         }
         return result;
     };
-    
+
     this.transposeValues = function(values){
         values = _.cloneDeep(values);
-        return values[0].map((col, i) => values.map(row => row[i]));
+        return values[0].map(function(col, i){
+            return values.map(function(row){
+                return row[i];
+            });
+        });
     };
 
-    
+
     this.removeColumn = function(values, index) {
         values = _.cloneDeep(values);
         for(var i = 0; i < values.length; i++){
@@ -61,153 +65,153 @@ angular.module('ginfluxApp')
         }
         return values;
     };
-    
-	/**
-	 * Format data as local date
-	 * 
-	 * Options:
-	 * <ul>
-	 * 	<li>type: data format (DateTime, )</li>
-	 * 	<li>format: string to format data</li>
-	 * </ul>
-	 * 
-	 * <h3>DateTime</h3>
-	 * 
-	 * In this case data must be a UnixTime in UTC, and the option format must 
-	 * be as described here: 
-	 * 
-	 * http://pubs.opengroup.org/onlinepubs/009695399/functions/strptime.html
-	 * 
-	 * <h3>Default format</h3>
-	 * 
-	 * By default we suppose data is an number value and try to format as described
-	 * here:
-	 * 
-	 * https://docs.python.org/3/library/string.html#format-specification-mini-language
-	 * 
-	 * 
-	 * @param data value
-	 * @param option to format data
-	 */
-	function formatData(data, option){
 
-	    if (option.type === 'DateTime') {
-	      // TODO: maso, 2018:support local date format
-	      //TODO:mgh: curently convert 0 second to 3:00:00!
-	      var date = moment.unix(data);
-	      return date.format(option.specifier || 'HH:MM:SS');
-	    }
+    /**
+     * Format data as local date
+     * 
+     * Options:
+     * <ul>
+     * 	<li>type: data format (DateTime, )</li>
+     * 	<li>format: string to format data</li>
+     * </ul>
+     * 
+     * <h3>DateTime</h3>
+     * 
+     * In this case data must be a UnixTime in UTC, and the option format must 
+     * be as described here: 
+     * 
+     * http://pubs.opengroup.org/onlinepubs/009695399/functions/strptime.html
+     * 
+     * <h3>Default format</h3>
+     * 
+     * By default we suppose data is an number value and try to format as described
+     * here:
+     * 
+     * https://docs.python.org/3/library/string.html#format-specification-mini-language
+     * 
+     * 
+     * @param data value
+     * @param option to format data
+     */
+    function formatData(data, option){
 
-	    if (option.type === 'Time') {
-	      var sec_num = data; // don't forget the second param
-	      var hours = Math.floor(sec_num / 3600);
-	      var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-	      var seconds = sec_num - (hours * 3600) - (minutes * 60);
+        if (option.type === 'DateTime') {
+            // TODO: maso, 2018:support local date format
+            //TODO:mgh: curently convert 0 second to 3:00:00!
+            var date = moment.unix(data);
+            return date.format(option.specifier || 'HH:MM:SS');
+        }
 
-	      if (minutes < 10) {
-	        minutes = '0' + minutes;
-	      }
-	      if (seconds < 10) {
-	        seconds = '0' + seconds;
-	      }
-	      if (hours === 0) {
-	        return minutes + ':' + seconds;
-	      }
-	      if (hours < 10) {
-	        hours = '0' + hours;
-	      }
-	      return hours+':'+minutes+':'+seconds;
-	    }
+        if (option.type === 'Time') {
+            var sec_num = data; // don't forget the second param
+            var hours = Math.floor(sec_num / 3600);
+            var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+            var seconds = sec_num - (hours * 3600) - (minutes * 60);
 
-	    if (option.type === 'Number') {
-	      return d3.format(option.specifier || '.xx')(data);
-	    }
+            if (minutes < 10) {
+                minutes = '0' + minutes;
+            }
+            if (seconds < 10) {
+                seconds = '0' + seconds;
+            }
+            if (hours === 0) {
+                return minutes + ':' + seconds;
+            }
+            if (hours < 10) {
+                hours = '0' + hours;
+            }
+            return hours+':'+minutes+':'+seconds;
+        }
 
-	    //Convert long string to short string: if string length greater than Specifier; it is converted as Specifier/3 character
-	    // from begging of the input string, then three dots (...) , and finally 2*Specifier/3 character from end of input string
-	    if (option.type === 'ShortString') {
+        if (option.type === 'Number') {
+            return d3.format(option.specifier || '.xx')(data);
+        }
 
-	      //the defulat value of specifier is 18
-	      var maxLen=option.specifier||(15+3);
-	      var startLen = (maxLen-3)/3;
-	      var endLen = (maxLen-3)-startLen;
+        //Convert long string to short string: if string length greater than Specifier; it is converted as Specifier/3 character
+        // from begging of the input string, then three dots (...) , and finally 2*Specifier/3 character from end of input string
+        if (option.type === 'ShortString') {
 
-	      if (typeof data !== 'string' || data.length <= maxLen){
-	        return data;
-	      }
+            //the defulat value of specifier is 18
+            var maxLen=option.specifier||(15+3);
+            var startLen = (maxLen-3)/3;
+            var endLen = (maxLen-3)-startLen;
 
-	      return data.substr(0, startLen) + '...' + data.substr(data.length - endLen, data.length);
-	    }
+            if (typeof data !== 'string' || data.length <= maxLen){
+                return data;
+            }
 
-	    return data;
-	}
+            return data.substr(0, startLen) + '...' + data.substr(data.length - endLen, data.length);
+        }
 
-	/**
-	 * Search and replace data in sheet
-	 * 
-	 * 
-	 * query: a search query
-	 * replace: a replacement
-	 * range: where to search (may be empty)
-	 * 
-	 * match: true/false matche the case
-	 * regex: true/false match based on regex
-	 * formula: true/false search in formula
-	 */
-	function findAndReplace(sheet, option){
-		// Replace with regex
-		if(option.regex && option.match){
-			var regex = new RegExp(option.query, 'ig');
-			angular.forEach(sheet.values, function(row, i){
-				angular.forEach(row, function(cell, j){
-					if(regex.test(cell)){
-						sheet.values[i][j] = sheet.values[i][j].replace(regex, option.replace);
-					}
-				});
-			});
-		}
-		// TODO: support the others
-	}
+        return data;
+    }
+
+    /**
+     * Search and replace data in sheet
+     * 
+     * 
+     * query: a search query
+     * replace: a replacement
+     * range: where to search (may be empty)
+     * 
+     * match: true/false matche the case
+     * regex: true/false match based on regex
+     * formula: true/false search in formula
+     */
+    function findAndReplace(sheet, option){
+        // Replace with regex
+        if(option.regex && option.match){
+            var regex = new RegExp(option.query, 'ig');
+            angular.forEach(sheet.values, function(row, i){
+                angular.forEach(row, function(cell, j){
+                    if(regex.test(cell)){
+                        sheet.values[i][j] = sheet.values[i][j].replace(regex, option.replace);
+                    }
+                });
+            });
+        }
+        // TODO: support the others
+    }
 
 
-	function appendSheetsAsRow(dataSheet){
-		var sheet = {
-				key: 'New sheet',
-				values:[]
-		};
-		for(var i = 0; i < dataSheet.length; i++){
-			for(var j = 0; j < dataSheet[i].values.length; j++){
-				sheet.values.push(dataSheet[i].values[j]);
-			}
-		}
-		return sheet;
-	}
+    function appendSheetsAsRow(dataSheet){
+        var sheet = {
+                key: 'New sheet',
+                values:[]
+        };
+        for(var i = 0; i < dataSheet.length; i++){
+            for(var j = 0; j < dataSheet[i].values.length; j++){
+                sheet.values.push(dataSheet[i].values[j]);
+            }
+        }
+        return sheet;
+    }
 
-	function appendTextToColumn(text, column, sheet){
-		for(var i = 0; i < sheet.values.length; i++){
-			sheet.values[i][column] = text + sheet.values[i][column];
-		}
-	}
-	
-	this.adjust = function(values, column){
-	    // find min
-	    var min = values[0][column];
-	    for(var i = 0; i < values.length; i++){
-	        if(min > values[i][column]){
-	            min = values[i][column];
-	        }
-	    }
-	    
-	    // adjust
-	    for(var j = 0; j < values.length; j++){
-	        values[j][column] -= min;
-	    }
-	};
+    function appendTextToColumn(text, column, sheet){
+        for(var i = 0; i < sheet.values.length; i++){
+            sheet.values[i][column] = text + sheet.values[i][column];
+        }
+    }
 
-	// public methods
-	this.formatData = formatData;
-	this.findAndReplace = findAndReplace; 
-	this.appendSheetsAsRow = appendSheetsAsRow;
-	this.appendTextToColumn = appendTextToColumn;
+    this.adjust = function(values, column){
+        // find min
+        var min = values[0][column];
+        for(var i = 0; i < values.length; i++){
+            if(min > values[i][column]){
+                min = values[i][column];
+            }
+        }
+
+        // adjust
+        for(var j = 0; j < values.length; j++){
+            values[j][column] -= min;
+        }
+    };
+
+    // public methods
+    this.formatData = formatData;
+    this.findAndReplace = findAndReplace; 
+    this.appendSheetsAsRow = appendSheetsAsRow;
+    this.appendTextToColumn = appendTextToColumn;
 });
 
