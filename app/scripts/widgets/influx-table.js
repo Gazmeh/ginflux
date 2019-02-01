@@ -114,6 +114,10 @@ angular.module('ginfluxApp')//
         for(var key in tags) {
             label = label + key + ':' + tags[key] + ',';
         }
+        //remove last extra comma
+        if(label.length>0){
+            label=label.slice(0, -1);
+        }
         return label;
     };
 
