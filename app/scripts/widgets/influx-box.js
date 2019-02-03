@@ -18,6 +18,9 @@ angular.module('ginfluxApp')//
         $scope : $scope,
     }));
 
+    //color palete
+    this.colorPalete = ['#E8743B', '#19A979', '#ED4A7B', '#945ECF', '#13A4B4', '#525DF4', '#BF399E', '#6C8893', '#EE6868', '#2F6497', '#dc0d0e'];
+
     this.getValues = function(key) {
         var query = this.getQueryByFingerprint(key.fingerPrint);
         var columns = this.getCacheSeriesColumns(query, key.resultIndex, key.seriesIndex);
@@ -41,7 +44,7 @@ angular.module('ginfluxApp')//
         for(var i = 0; i < q0.length; i++){
             var serie = {
                     label: ''+ i, // TODO: get titles of config
-                    color: 'blue',
+                    color: this.colorPalete[i%this.colorPalete.length],
                     values :  {
                         'whisker_low': q0[i],
                         'Q1': q1[i],

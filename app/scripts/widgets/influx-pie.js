@@ -13,6 +13,9 @@ angular.module('ginfluxApp')//
  */
 .controller('GInfluxPieWidgetCtrl', function ($scope, $controller) {
 
+    //color palete
+    this.colorPalete = ['#E8743B', '#19A979', '#ED4A7B', '#945ECF', '#13A4B4', '#525DF4', '#BF399E', '#6C8893', '#EE6868', '#2F6497', '#dc0d0e'];
+
     // extend
     angular.extend(this, $controller('GInfluxMultilineWidgetCtrl', {
         $scope : $scope,
@@ -38,7 +41,8 @@ angular.module('ginfluxApp')//
                     key : this.series[i].title,
                     //columns : g.columns,
                     type : this.series[i].type || 'line',
-                    yAxis : (this.series[i].leftAxis) ? 0 : 1
+                    yAxis : (this.series[i].leftAxis) ? 0 : 1,
+                    color: this.colorPalete[i%this.colorPalete.length]
             };
             this.data.push(serie);
         }
