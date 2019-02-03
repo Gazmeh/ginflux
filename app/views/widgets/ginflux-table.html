@@ -22,7 +22,7 @@
 			<td 
 				ng-repeat="value in row track by $index" 
 				translate>
-				{{value}}
+				{{value|number}}
 			</td>
 		</tr>
 	</tbody>
@@ -51,7 +51,7 @@
 			<td 
 				ng-repeat="value in row track by $index" 
 				translate>
-				{{value|number:2}}
+				{{value|number}}
 			</td>
 		</tr>
 	</tbody>
