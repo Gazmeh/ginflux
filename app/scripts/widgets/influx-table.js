@@ -138,4 +138,12 @@ angular.module('ginfluxApp')//
         }
     };
 
+    $scope.isNumber=function(value){
+        if(angular.isNumber(value)){
+            return true;
+        } else{
+            return false;
+        }
+    };
+
 });

@@ -22,7 +22,8 @@
 			<td 
 				ng-repeat="value in row track by $index" 
 				translate>
-				{{value|number}}
+				<span ng-if="isNumber(value)">{{value|number}}</span>
+				<span ng-if="!isNumber(value)">{{value}}</span>
 			</td>
 		</tr>
 	</tbody>
@@ -51,7 +52,8 @@
 			<td 
 				ng-repeat="value in row track by $index" 
 				translate>
-				{{value|number}}
+				<span ng-if="isNumber(value)">{{value|number}}</span>
+				<span ng-if="!isNumber(value)">{{value}}</span>
 			</td>
 		</tr>
 	</tbody>
