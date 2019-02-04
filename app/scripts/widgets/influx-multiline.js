@@ -255,8 +255,8 @@ angular.module('ginfluxApp')//
             var query = this.getQueryByFingerprint(key.fingerPrint);
             var serieTitle = query.title + '__' + key.column + this.tagsToLable(key);
 
-            //Apply user defined replacers:
-            serieTitle = this.replace(serieTitle, [{ find: query.autoFind, replace: query.autoReplace }]);
+            //Apply user defined replacers (if after replace title changed to null string we use original tilte):
+            serieTitle = this.replace(serieTitle, [{ find: query.autoFind, replace: query.autoReplace }])||serieTitle;
 
             return _.merge({
                 // UI

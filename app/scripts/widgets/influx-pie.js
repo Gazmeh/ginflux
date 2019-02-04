@@ -33,7 +33,7 @@ angular.module('ginfluxApp')//
 
     this.loadViewData = function () {
         this.data = [];
-
+        
         for(var i = 0; i < this.series.length; i++){
             var values = this.getValues(this.series[i]);
             var serie = {

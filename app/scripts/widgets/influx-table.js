@@ -80,7 +80,7 @@ angular.module('ginfluxApp')//
                     var label = this.tagsToLable(this.body[i].tags);
 
                     //Apply user defined replacers:
-                    label = this.replace(label, [{ find: queries[0].autoFind, replace: queries[0].autoReplace }]);
+                    label = this.replace(label, [{ find: queries[0].autoFind, replace: queries[0].autoReplace }])||label;
 
                     this.body[i].label = label;
                 }
