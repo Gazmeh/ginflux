@@ -63,13 +63,13 @@ angular.module('ginfluxApp')//
                 var keys = this.mapQueryToKeys(queries[i]);
                 for (var j = 0; j < keys.length; j++) {
                     var series = this.getSeriesByKey(keys[j]);
-//                    if (series) {
-//                        this.unmarkAllSeriesDeleted(series);
-//                    } else {
-                        series = this.createNewSeries(keys[j]);
-                        series.color = this.colorPalete[j % this.colorPalete.length];
-                        this.series.push(series);
-//                    }
+                    //                    if (series) {
+                    //                        this.unmarkAllSeriesDeleted(series);
+                    //                    } else {
+                    series = this.createNewSeries(keys[j]);
+                    series.color = this.colorPalete[j % this.colorPalete.length];
+                    this.series.push(series);
+                    //                    }
                 }
             }
             this.removeAllMarkedSeries();
@@ -253,9 +253,14 @@ angular.module('ginfluxApp')//
 
         this.createNewSeries = function (key) {
             var query = this.getQueryByFingerprint(key.fingerPrint);
+            var serieTitle = query.title + '__' + key.column + this.tagsToLable(key);
+
+            //Apply user defined replacers:
+            serieTitle = this.replace(serieTitle, [{ find: query.autoFind, replace: query.autoReplace }]);
+
             return _.merge({
                 // UI
-                title: query.title + '__' + key.column + this.tagsToLable(key),
+                title: serieTitle,
                 description: query.description,
                 color: '#000000' // TODO: maso, 2018: put random
             }, key);
@@ -272,6 +277,10 @@ angular.module('ginfluxApp')//
             var label = '__';
             for (key in tags) {
                 label = label + key + ':' + tags[key] + ',';
+            }
+            //remove last extra comma
+            if (label.length > 0) {
+                label = label.slice(0, -1);
             }
             return label;
         };
@@ -345,5 +354,27 @@ angular.module('ginfluxApp')//
 
             return newValues;
         };
+
+        /*
+        * find and replace text on the input parameter.
+        * replacers parameter contain multiple find/replcae strings.
+        */
+        this.replace = function (input, replacers) {
+            var result = input;
+            if (input === undefined || replacers === undefined) {
+                return result;
+            }
+            for (var i = 0; i < replacers.length; i++) {
+                var from = replacers[i].find;
+                var to = replacers[i].replace;
+                if (from === undefined || from === '' || to === undefined) {
+                    continue;
+                }
+                var regex = new RegExp(from, 'g');
+                result = result.replace(regex, to);
+            }
+            return result;
+        };
+
 
     });

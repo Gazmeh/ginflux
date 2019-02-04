@@ -4,9 +4,9 @@
 		<legend><span translate>Query</span>&nbsp;{{$index+1}}</legend>
 
 		<md-switch ng-model="query.useAsContext" ng-change="ctrl.queryChanged()" aria-label="Use query as context">
-				<span translate>Preproccessing query (not visualized)</span>
-			</md-switch>
-		
+			<span translate>Preproccessing query (not visualized)</span>
+		</md-switch>
+
 		<md-input-container>
 			<label translate>Title</label>
 			<input type="text" aria-label="Query title" ng-model="query.title" ng-model-options="{updateOn : 'change'}"
@@ -21,11 +21,11 @@
 		</md-input-container>
 
 		<md-input-container ng-hide="query.useAsContext">
-				<label translate>Index attribute</label>
-				<input type="text" aria-label="Query index value" ng-model="query.index" ng-model-options="{updateOn : 'change'}"
-				 ng-change="ctrl.queryChanged()">
-				</textarea>
-			</md-input-container>
+			<label translate>Index attribute</label>
+			<input type="text" aria-label="Query index value" ng-model="query.index" ng-model-options="{updateOn : 'change'}"
+			 ng-change="ctrl.queryChanged()">
+			</textarea>
+		</md-input-container>
 
 		<md-input-container class="setting-control-wide">
 			<label translate>Query</label>
@@ -34,6 +34,23 @@
 		</textarea>
 		</md-input-container>
 
+		<!--TODO: support multi find/replace section -->
+		<fieldset>
+			<legend translate>Automatic Replacers</legend>
+			<md-input-container>
+				<label translate>Find</label>
+				<input type="text" aria-label="Query title" ng-model="query.autoFind" ng-model-options="{updateOn : 'change'}"
+				 ng-change="ctrl.queryChanged()">
+				</textarea>
+			</md-input-container>
+			<md-input-container>
+				<label translate>Replace</label>
+				<input type="text" aria-label="Query title" ng-model="query.autoReplace" ng-model-options="{updateOn : 'change'}"
+				 ng-change="ctrl.queryChanged()">
+				</textarea>
+			</md-input-container>
+		</fieldset>
+
 		<md-input-container ng-hide="query.useAsContext">
 			<md-checkbox ng-model="query.visible" ng-change="ctrl.queryChanged()" aria-label="Visible">
 				<span translate>Visible</span>
@@ -41,7 +58,7 @@
 		</md-input-container>
 
 		<div layout="row">
-				<span flex></span>
+			<span flex></span>
 			<md-button class="md-warn" ng-click="ctrl.removeQuery($index)">
 				<span translate>Delete</span>
 			</md-button>

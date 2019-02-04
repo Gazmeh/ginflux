@@ -13,14 +13,14 @@ angular.module('ginfluxApp')//
  */
 .controller('GInfluxPieWidgetCtrl', function ($scope, $controller) {
 
-    //color palete
-    this.colorPalete = ['#E8743B', '#19A979', '#ED4A7B', '#945ECF', '#13A4B4', '#525DF4', '#BF399E', '#6C8893', '#EE6868', '#2F6497', '#dc0d0e'];
-
     // extend
     angular.extend(this, $controller('GInfluxMultilineWidgetCtrl', {
         $scope : $scope,
     }));
 
+    //color palete
+    this.colorPalete = ['#E8743B', '#19A979', '#ED4A7B', '#945ECF', '#13A4B4', '#525DF4', '#BF399E', '#6C8893', '#EE6868', '#2F6497', '#dc0d0e'];
+    
     this.getValues = function(key) {
         var query = this.getQueryByFingerprint(key.fingerPrint);
         var columns = this.getCacheSeriesColumns(query, key.resultIndex, key.seriesIndex);
@@ -33,6 +33,7 @@ angular.module('ginfluxApp')//
 
     this.loadViewData = function () {
         this.data = [];
+
         for(var i = 0; i < this.series.length; i++){
             var values = this.getValues(this.series[i]);
             var serie = {
@@ -65,6 +66,8 @@ angular.module('ginfluxApp')//
                     legendPosition: this.getModelProperty('chart.legend.position') || 'top',
                     legend : {
                         align : this.getModelProperty('chart.legend.align'),
+                        //TODO: add setting control for max key legend
+                        maxKeyLength:200,                        
                         margin : {
                             top : this.getModelProperty('chart.legend.margin.top') || 0,
                             right : this.getModelProperty('chart.legend.margin.right') || 0,
