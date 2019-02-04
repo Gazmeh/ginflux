@@ -86,6 +86,8 @@ angular.module('ginfluxApp')
     this.setCurrentVariableSet = function(variableSet){
         this.currentVariableSet = variableSet;
         $ghReport.setCurrentVariableSet(variableSet);
+        // reload all widgets
+        this.reloadWidgets();
     };
     
     /**
@@ -179,6 +181,9 @@ angular.module('ginfluxApp')
     };
     
     this.reloadWidgets = function(){
+        if(!this.rootWidget) {
+            return;
+        }
         var widgets = $widget.getChildren(this.rootWidget);
         angular.forEach(widgets, function(widget){
             if(angular.isFunction(widget.refreshInflux)){
