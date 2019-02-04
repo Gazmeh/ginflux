@@ -58,19 +58,20 @@ angular.module('ginfluxApp')//
             this.series = this.getModelProperty('series') || [];
             // load series of each query
             this.markAllSeriesDeleted();
-            for (var i = 0; i < queries.length; i++) {
-                var keys = this.mapQueryToKeys(queries[i]);
-                for (var j = 0; j < keys.length; j++) {
-                    var series = this.getSeriesByKey(keys[j]);
-                    if (series) {
-                        this.unmarkAllSeriesDeleted(series);
-                    } else {
-                        series = this.createNewSeries(keys[j]);
-                        series.color = this.colorPalete[j % this.colorPalete.length];
-                        this.series.push(series);
-                    }
-                }
-            }
+            // Note it is not easy to reuse serices
+//            for (var i = 0; i < queries.length; i++) {
+//                var keys = this.mapQueryToKeys(queries[i]);
+//                for (var j = 0; j < keys.length; j++) {
+//                    var series = this.getSeriesByKey(keys[j]);
+//                    if (series) {
+//                        this.unmarkAllSeriesDeleted(series);
+//                    } else {
+//                        series = this.createNewSeries(keys[j]);
+//                        series.color = this.colorPalete[j % this.colorPalete.length];
+//                        this.series.push(series);
+//                    }
+//                }
+//            }
             this.removeAllMarkedSeries();
             this.setModelProperty('series', this.series);
             this.loadViewData();
