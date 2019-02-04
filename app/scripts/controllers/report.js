@@ -27,7 +27,7 @@ angular.module('ginfluxApp')
  * @name GMeterReportStressConfigCtrl
  * 
  */
-.controller('GInfluxReportCtrl', function($scope, $controller, $ghReport, $routeParams, $wbUtil, $actions, $navigator) {
+.controller('GInfluxReportCtrl', function($scope, $controller, $ghReport, $routeParams, $widget, $wbUtil, $actions, $navigator, FileSaver) {
 
     // init controller
     angular.extend(this, $controller('AmdAbstractDashboardCtrl', {
@@ -134,6 +134,62 @@ angular.module('ginfluxApp')
         });
     };
     
+    this.download = function(){
+        var MIME_WB = 'application/weburger+json;charset=utf-8';
+
+        // save  result
+        var dataString = JSON.stringify(ctrl.design);
+        var data = new Blob([dataString], {
+            type: MIME_WB
+        });
+        return FileSaver.saveAs(data, ctrl.report.id+'.json');
+    };
+    
+    this.upload = function(){
+        var ctrl = this;
+        var fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.style.display = 'none';
+        fileInput.onchange = function (event) {
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                var design = JSON.parse(event.target.result);
+                ctrl.design = $wbUtil.clean(design || {});
+                $scope.$digest();
+            };
+            reader.readAsText(event.target.files[0]);
+        };
+        document.body.appendChild(fileInput);
+        // click Elem (fileInput)
+        var eventMouse = document.createEvent('MouseEvents');
+        eventMouse.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        fileInput.dispatchEvent(eventMouse);
+    };
+    
+    this.widgetSelectEvent = function($event){
+        this.loadSettings($event);
+        // Find root widget
+        if(!angular.isArray($event.widgets) || $event.widgets === 0){
+            return;
+        }
+        var source = $event.widgets[0];
+        if(source.isRoot()){
+            this.rootWidget = source;
+        }
+    };
+    
+    this.reloadWidgets = function(){
+        var widgets = $widget.getChildren(this.rootWidget);
+        angular.forEach(widgets, function(widget){
+            if(angular.isFunction(widget.refreshInflux)){
+                try{
+                    widget.refreshInflux();
+                } catch(ex){};
+            }
+        });
+    };
+    
+    
     var ctrl = this;
     $actions.newAction({
         id: 'ginflux.local.report.save',
@@ -143,6 +199,18 @@ angular.module('ginfluxApp')
         description: 'Save modifications on the current report',
         action: function(){
             ctrl.save();
+        },
+        groups: ['mb.toolbar.menu'],
+        scope: $scope
+    });
+    $actions.newAction({
+        id: 'ginflux.local.report.edit',
+        priority: 15,
+        icon: 'edit',
+        title: 'Edit the report',
+        description: 'Edit current report',
+        action: function(){
+            ctrl.toogleEditable();
         },
         groups: ['mb.toolbar.menu'],
         scope: $scope

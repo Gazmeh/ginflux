@@ -45,8 +45,29 @@
 						</button>
 						<md-menu-content>
 							<md-menu-item>
-								<md-button>
-									<span translate>Share</span>
+								<md-button
+									ng-click="ctrl.download()">
+									<span translate>Download</span>
+								</md-button>
+							</md-menu-item>
+							<md-menu-item>
+								<md-button
+									ng-click="ctrl.upload()">
+									<span translate>Upload</span>
+								</md-button>
+							</md-menu-item>
+						</md-menu-content>
+					</md-menu>
+					<md-menu
+						ng-show="ctrl.rootWidget">
+						<button ng-click="$mdMenu.open()">
+							<span translate>Report</span>
+						</button>
+						<md-menu-content>
+							<md-menu-item>
+								<md-button
+									ng-click="ctrl.reloadWidgets()">
+									<span translate>Reload all widget</span>
 								</md-button>
 							</md-menu-item>
 						</md-menu-content>
@@ -94,50 +115,6 @@
 			</div>
 		</div>
 	</md-toolbar>
-<!-- 	<md-toolbar -->
-<!-- 		id="report-extra-action" -->
-<!-- 		class="md-hue-2"> -->
-<!-- 		<div  -->
-<!-- 			class="md-toolbar-tools" -->
-<!-- 			layout="row"> -->
-<!-- 			<span flex></span> -->
-<!-- 			<md-divider></md-divider> -->
-<!-- 			<md-input-container> -->
-<!-- 				<md-select  -->
-<!-- 					ng-model="ctrl.currentVariableSet"  -->
-<!-- 					ng-change="ctrl.setCurrentVariableSet(ctrl.currentVariableSet)" -->
-<!-- 					md-selected-text="{{item.title}}"> -->
-<!-- 					<md-option  -->
-<!-- 						ng-repeat="item in ctrl.variableSets track by $index"  -->
-<!-- 						ng-value="item">{{item.title}}</md-option> -->
-<!-- 				</md-select> -->
-<!-- 			</md-input-container> -->
-<!-- 			<md-button  -->
-<!-- 				ng-click="ctrl.viewVariableSets()" -->
-<!-- 				class="md-icon-button"  -->
-<!-- 				aria-label="Display current variable set"> -->
-<!-- 				<wb-icon>visibility</wb-icon> -->
-<!-- 			</md-button> -->
-<!-- 			<md-button  -->
-<!-- 				ng-click="ctrl.managesVariableSets()" -->
-<!-- 				class="md-icon-button"  -->
-<!-- 				aria-label="Manage variable sets"> -->
-<!-- 				<wb-icon>settings</wb-icon> -->
-<!-- 			</md-button> -->
-<!-- 			<md-button  -->
-<!-- 				ng-click="ctrl.addVariableSet()" -->
-<!-- 				class="md-icon-button"  -->
-<!-- 				aria-label="Add a variable sets"> -->
-<!-- 				<wb-icon>add</wb-icon> -->
-<!-- 			</md-button> -->
-<!-- 			<md-button  -->
-<!-- 				ng-click="ctrl.deleteVariableSet()" -->
-<!-- 				class="md-icon-button"  -->
-<!-- 				aria-label="Delete the current variable sets"> -->
-<!-- 				<wb-icon>delete</wb-icon> -->
-<!-- 			</md-button> -->
-<!-- 		</div> -->
-<!-- 	</md-toolbar> -->
 
 	<div 
 		layout="row" 
@@ -233,8 +210,8 @@
 			<wb-group
 				style="overflow: hiden;"
 				wb-editable="editable" 
-				wb-on-model-select="ctrl.loadSettings($event)"
-				ng-model="model">
+				wb-on-model-select="ctrl.widgetSelectEvent($event)"
+				ng-model="ctrl.design">
 			</wb-group>
 		</md-content>
 	
