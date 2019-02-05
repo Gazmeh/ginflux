@@ -57,7 +57,7 @@ angular.module('ginfluxApp')//
                 }
                 var serie = {
                         label: title, 
-                        color: this.colorPalete[i % this.colorPalete.length],
+                        color: this.colorPalete[si % this.colorPalete.length],
                         values: {
                             'whisker_low': q0[i],
                             'Q1': q1[i],
