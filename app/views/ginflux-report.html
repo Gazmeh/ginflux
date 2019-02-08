@@ -109,6 +109,23 @@
 									<span translate>Delete current variables</span>
 								</md-button>
 							</md-menu-item>
+							<md-divider></md-divider>
+							<md-menu-item>
+								<wb-icon>download</wb-icon>
+								<md-button 
+									ng-click="ctrl.downloadVariableSet()"
+									aria-label="Download the current variable sets">
+									<span translate>Download</span>
+								</md-button>
+							</md-menu-item>
+							<md-menu-item>
+								<wb-icon>upload</wb-icon>
+								<md-button 
+									ng-click="ctrl.uploadVariableSet()"
+									aria-label="Upload a variable sets as current">
+									<span translate>Upload</span>
+								</md-button>
+							</md-menu-item>
 						</md-menu-content>
 					</md-menu>
 				</md-menu-bar>

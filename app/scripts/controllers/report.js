@@ -194,6 +194,14 @@ angular.module('ginfluxApp')
         });
     };
     
+    this.downloadVariableSet = function(){
+        $ghReport.downloadCurrentVariableSet();
+    };
+    
+    this.uploadVariableSet = function(){
+        $ghReport.uploadVariableSet();
+    };
+    
     
     var ctrl = this;
     $actions.newAction({

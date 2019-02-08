@@ -29,7 +29,7 @@ angular.module('ginfluxApp')
  * 
  * Manage designer items
  */
-.service('$ghReport', function ($rootScope, $q) {
+.service('$ghReport', function ($rootScope, $q, FileSaver) {
 
     /**
      * Gets default URL
@@ -115,6 +115,46 @@ angular.module('ginfluxApp')
         return $rootScope.app.setting.ginfluxVirableSet[index];
     };
     
+    /*
+     * Downloads last variable set 
+     */
+    this.downloadCurrentVariableSet = function(){
+        var varset = this.getCurrentVariableSet();
+        var MIME_WB = 'application/json;charset=utf-8';
+
+        // save  result
+        var dataString = JSON.stringify(varset);
+        var data = new Blob([dataString], {
+            type: MIME_WB
+        });
+        return FileSaver.saveAs(data, varset.title + '.json');
+    };
+    
+    /*
+     * Upload and set the current variable set
+     */
+    this.uploadVariableSet = function(){
+        var service = this;
+        
+        var fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.style.display = 'none';
+        fileInput.onchange = function (event) {
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                var varset = JSON.parse(event.target.result);
+                service.addVariableSet(varset);
+                $rootScope.$digest();
+            };
+            reader.readAsText(event.target.files[0]);
+        };
+        document.body.appendChild(fileInput);
+        // click Elem (fileInput)
+        var eventMouse = document.createEvent('MouseEvents');
+        eventMouse.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        fileInput.dispatchEvent(eventMouse);
+    };
+    
     /**
      * Adds new variable sets
      */
@@ -123,6 +163,7 @@ angular.module('ginfluxApp')
             $rootScope.app.setting.ginfluxVirableSet = [];
         }
         $rootScope.app.setting.ginfluxVirableSet.push(variableSet);
+        this.setCurrentVariableSet(variableSet);
         return variableSet;
     };
     
