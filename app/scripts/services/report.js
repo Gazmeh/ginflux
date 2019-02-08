@@ -37,11 +37,11 @@ angular.module('ginfluxApp')
     this.getDefaultBackend = function () {
         return $rootScope.app.setting.ginfluxUrl;
     };
-    
+
     this.getDefaultQueryIndex = function(){
         return $rootScope.app.setting.ginfluxIndex || 'time';
     };
-    
+
     /**
      * Get local reports
      * 
@@ -77,7 +77,7 @@ angular.module('ginfluxApp')
             message: 'report not found'
         });
     };
-    
+
     /**
      * Gets list of variable set
      */
@@ -90,7 +90,7 @@ angular.module('ginfluxApp')
                     {active: true, key: 'host', value: 'http://195.146.59.40:8086/query'},
                     {active: true, key: 'db', value: 'test_run_2406'},
                     {active: true, key: 'measurement', value: 'samples'},
-                ]
+                    ]
             }];
         }
         return $rootScope.app.setting.ginfluxVirableSet;
@@ -103,7 +103,7 @@ angular.module('ginfluxApp')
         var index = $rootScope.app.setting.ginfluxVirableSet.indexOf(variableSet);
         $rootScope.app.setting.ginfluxCurrentVirableSetIndex = index;
     };
-    
+
     /**
      * Gets current variable sets
      */
@@ -114,7 +114,7 @@ angular.module('ginfluxApp')
         }
         return $rootScope.app.setting.ginfluxVirableSet[index];
     };
-    
+
     /*
      * Downloads last variable set 
      */
@@ -129,13 +129,13 @@ angular.module('ginfluxApp')
         });
         return FileSaver.saveAs(data, varset.title + '.json');
     };
-    
+
     /*
      * Upload and set the current variable set
      */
     this.uploadVariableSet = function(){
         var service = this;
-        
+
         var fileInput = document.createElement('input');
         fileInput.type = 'file';
         fileInput.style.display = 'none';
@@ -154,7 +154,7 @@ angular.module('ginfluxApp')
         eventMouse.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
         fileInput.dispatchEvent(eventMouse);
     };
-    
+
     /**
      * Adds new variable sets
      */
@@ -166,7 +166,7 @@ angular.module('ginfluxApp')
         this.setCurrentVariableSet(variableSet);
         return variableSet;
     };
-    
+
     /**
      * Removes a variable set
      */
@@ -178,9 +178,12 @@ angular.module('ginfluxApp')
         var index = $rootScope.app.setting.ginfluxVirableSet.indexOf(variableSet);
         if(index >= 0) {
             $rootScope.app.setting.ginfluxVirableSet.splice(index, 1);
+            if($rootScope.app.setting.ginfluxVirableSet.length){
+                this.setCurrentVariableSet($rootScope.app.setting.ginfluxVirableSet[0]);
+            }
         }
     };
-    
+
     /**
      * Update variable sets
      */
