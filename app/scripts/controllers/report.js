@@ -189,7 +189,7 @@ angular.module('ginfluxApp')
             if(angular.isFunction(widget.refreshInflux)){
                 try{
                     widget.refreshInflux();
-                } catch(ex){};
+                } catch(ex){}
             }
         });
     };

@@ -119,7 +119,7 @@ angular.module('ginfluxApp')//
         //Set Min and Max constraints for Y1 Axsis
         var y1Min = this.getModelProperty('chart.y.min') || 0;
         var y1Max = this.getModelProperty('chart.y.max') || 0;
-        if (y1Min != 0 || y1Max != 0) {
+        if (y1Min !== 0 || y1Max !== 0) {
             this.option.chart.yDomain = [y1Min, y1Max];
         } else {
             this.option.chart.yDomain = null;
